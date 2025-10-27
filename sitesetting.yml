@@ -100,7 +100,7 @@
 - adx_description: ''
   adx_name: Search/Enabled
   adx_sitesettingid: 7d952ed5-85c3-4cb4-a2e6-1f4104049bd3
-  adx_value: true
+  adx_value: false
 - adx_name: Authentication/OpenIdConnect/AzureAD/RebrandDisclaimerEnabled
   adx_sitesettingid: 7ee4de60-1cb3-f011-bbd3-6045bd3918f3
   adx_value: false
