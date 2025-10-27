@@ -1,0 +1,111 @@
+/* =========================================================
+   Aviso EPJA — CSS consolidado para producción
+   Archivo: web-files/css/aviso-aceptacion.css
+   ========================================================= */
+
+/* Paleta y tokens */
+:root{
+  --aviso-bg-start: #e9eef3;
+  --aviso-bg-end:   #f1f5f9;
+  --aviso-card-bg:  #ffffff;
+  --aviso-border:   rgba(2,6,23,0.06);
+  --aviso-text:     #0f172a;  /* texto principal (alto contraste) */
+  --aviso-sub:      #334155;  /* subtítulo */
+  --aviso-title:    #302f90;  /* color del título */
+  --aviso-shadow:   0 30px 80px rgba(2,6,23,0.12), 0 8px 24px rgba(2,6,23,0.08);
+}
+
+/* Fondo de la sección */
+#aviso-aceptacion.aviso-bg{
+  background: linear-gradient(180deg, var(--aviso-bg-start), var(--aviso-bg-end));
+  padding: min(8vh, 4rem) 1rem;
+}
+
+/* Tarjeta central */
+#aviso-aceptacion .aviso-card{
+  background: var(--aviso-card-bg);
+  border: 1px solid var(--aviso-border);
+  border-radius: 16px;
+  box-shadow: var(--aviso-shadow);
+  color: var(--aviso-text);
+  max-width: 960px;
+  margin: 4rem auto; /* espacio superior e inferior */
+  opacity: 1;        /* neutraliza temas con opacidad */
+  transform: translateY(10px);
+  animation: avisoFade .45s ease-out forwards;
+}
+@keyframes avisoFade{ to{ opacity:1; transform:translateY(0);} }
+
+/* Encabezado */
+#aviso-aceptacion .aviso-card-header{
+  padding: 3rem 3rem 0.5rem 3rem;  /* incluye espacio antes del título */
+  text-align: center;
+}
+#aviso-aceptacion .aviso-title{
+  color: var(--aviso-title);
+  font-weight: 800;
+  margin: 0 0 .25rem 0;
+  letter-spacing: .2px;
+  font-size: clamp(1.8rem, 2.5vw + 1rem, 2.6rem);
+}
+#aviso-aceptacion .aviso-subtitle{
+  color: var(--aviso-sub);
+  font-size: clamp(1rem, .3vw + .9rem, 1.1rem);
+  margin: 0;
+  text-align: center;
+}
+
+/* Cuerpo del mensaje */
+#aviso-aceptacion .aviso-card-body{
+  padding: 1rem 3rem 2rem 3rem;  /* sin hueco antes del primer párrafo */
+  text-align: justify;
+}
+#aviso-aceptacion .aviso-card-body p:first-of-type{ margin-top: 0; }
+#aviso-aceptacion .aviso-text,
+#aviso-aceptacion .aviso-card-body p{
+  color: var(--aviso-text);
+  font-size: clamp(1rem, .35vw + .95rem, 1.1rem);
+  line-height: 1.9;
+  text-align: justify;
+  text-indent: 0;          /* sin sangría; ajusta a .5em si deseas una ligera */
+  margin-bottom: 1.25rem;
+}
+#aviso-aceptacion .aviso-card strong{ color:#0b1324; font-weight:700; }
+
+/* Aceptación (checkbox) */
+#aviso-aceptacion .form-check{
+  display:flex; align-items:flex-start; gap:.6rem;
+  justify-content:flex-start; margin-top: 1.25rem;
+}
+#aviso-aceptacion .form-check-input{
+  cursor:pointer; width:1.2rem; height:1.2rem; margin-top:.3rem;
+}
+#aviso-aceptacion .form-check-label{ font-weight:600; color:#0f172a; }
+#aviso-aceptacion .form-text.text-muted{ color:#64748b; margin-left:.25rem; }
+
+/* Pie */
+#aviso-aceptacion .aviso-card-footer{
+  padding: 0 3rem 1.5rem 3rem;
+  border-top: 1px solid var(--aviso-border);
+  text-align:center; color:#64748b; font-size:.95rem;
+}
+
+/* Ocultar menú mientras no se acepte (controlado por la clase en <html>) */
+html.aviso-pending header .navbar-nav,
+html.aviso-pending .navbar-collapse,
+html.aviso-pending .nav,
+html.aviso-pending .navbar-right{
+  visibility: hidden; pointer-events:none; opacity:0;
+}
+
+/* Responsive */
+@media (max-width: 768px){
+  #aviso-aceptacion .aviso-card{ margin: 2rem auto; }
+  #aviso-aceptacion .aviso-card-header,
+  #aviso-aceptacion .aviso-card-body,
+  #aviso-aceptacion .aviso-card-footer{
+    padding-left: 1.25rem; padding-right: 1.25rem;
+  }
+  #aviso-aceptacion .aviso-text,
+  #aviso-aceptacion .aviso-card-body p{ line-height: 1.8; }
+}

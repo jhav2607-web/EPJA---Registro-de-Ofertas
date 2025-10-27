@@ -1,1 +1,8 @@
-<div class="page-copy"> {% editable page 'adx_copy' type: 'html', liquid: true %}</div>
+{% assign slug = page.adx_partialurl | default:'' | downcase %}
+{% assign nombre = page.adx_name | default:'' | downcase %}
+
+{% if slug == '' or slug == 'home' or nombre contains 'página principal' %}
+  {% include 'wt-aviso-aceptacion' %}
+{% endif %}
+
+{{ page.adx_copy | raw }}

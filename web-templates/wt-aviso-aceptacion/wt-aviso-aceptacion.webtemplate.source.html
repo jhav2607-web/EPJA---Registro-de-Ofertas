@@ -1,0 +1,131 @@
+{% comment %}
+Web Template: wt-aviso-aceptacion
+- Sin botón. El menú se oculta hasta que se acepte.
+- CSS versionado con ?v=3 para forzar refresco.
+{% endcomment %}
+
+<link rel="stylesheet" href="/css/aviso-aceptacion.css?v=8" />
+
+<style>
+  /* FORZAR CONTRASTE Y VISIBILIDAD */
+  #aviso-aceptacion .aviso-card,
+  #aviso-aceptacion .aviso-card *{
+    opacity: 1 !important;
+    text-shadow: none !important;
+  }
+
+  /* Fondo blanco sólido + texto oscuro */
+  #aviso-aceptacion .aviso-card{ background:#ffffff !important; }
+  #aviso-aceptacion .aviso-card,
+  #aviso-aceptacion .aviso-card p,
+  #aviso-aceptacion .aviso-card .aviso-text{
+    color:#0f172a !important;
+  }
+  #aviso-aceptacion .aviso-card strong{ color:#0b1324 !important; font-weight:700 !important; }
+  #aviso-aceptacion .aviso-subtitle{ color:#334155 !important; }
+
+  /* Encabezado (espacio antes del título, centrado) */
+  #aviso-aceptacion .aviso-card-header{
+    padding-top: 3rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+    text-align:center !important;
+  }
+  #aviso-aceptacion .aviso-title{
+    color:#302f90 !important;
+    margin-bottom: .25rem !important;
+  }
+
+  /* CUERPO con texto justificado y sin espacio inicial */
+  #aviso-aceptacion .aviso-card-body{
+    padding-top: 1rem !important;       /* se reduce para eliminar el hueco */
+    padding-bottom: 2rem !important;
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+    text-align: justify !important;
+  }
+
+  /* Elimina el margen superior del primer párrafo */
+  #aviso-aceptacion .aviso-card-body p:first-of-type{
+    margin-top: 0 !important;
+  }
+
+  /* Ajustes de texto */
+  #aviso-aceptacion .aviso-card-body p,
+  #aviso-aceptacion .aviso-card-body .aviso-text{
+    text-align: justify !important;
+    line-height: 1.9 !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  /* Checkbox */
+  #aviso-aceptacion .aviso-card-body .form-check{
+    justify-content: flex-start !important;
+    margin-top: 1.25rem !important;
+  }
+
+  /* Pie */
+  #aviso-aceptacion .aviso-card-footer{
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px){
+    #aviso-aceptacion .aviso-card-header,
+    #aviso-aceptacion .aviso-card-body,
+    #aviso-aceptacion .aviso-card-footer{
+      padding-left:1.25rem !important;
+      padding-right:1.25rem !important;
+    }
+    #aviso-aceptacion .aviso-card-body p,
+    #aviso-aceptacion .aviso-card-body .aviso-text{
+      text-indent: 1em !important;
+      line-height: 1.8 !important;
+    }
+  }
+</style>
+
+
+<main id="aviso-aceptacion" class="min-vh-100 d-flex align-items-center justify-content-center aviso-bg">
+  <section class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <div class="aviso-card shadow-lg">
+          <div class="aviso-card-header text-center">
+            <h1 class="aviso-title mb-2">Registro de Oferta Educativa</h1>
+            <p class="aviso-subtitle mb-0">Educación para jóvenes, adultos y adultos mayores</p>
+          </div>
+
+          <div class="aviso-card-body">
+            <p class="aviso-text">
+              Este formulario recopila información de oferta educativa, conforme a lo establecido en el
+              <strong>ACUERDO Nro. MINEDUC-MINEDUC-2024-00046-A</strong>, que regula la educación formal para jóvenes,
+              adultos y adultos mayores con escolaridad inconclusa. Asimismo, se deberá considerar el último permiso de
+              funcionamiento de la Institución Educativa <strong>actualizado</strong>. Por lo tanto, usted declara que la información
+              consignada en este formulario es veraz y se ajusta a las indicaciones previas.
+            </p>
+
+            <div class="form-check my-4">
+              <input class="form-check-input" type="checkbox" value="1" id="chkAcepto" aria-describedby="aceptoHelp" />
+              <label class="form-check-label fw-semibold" for="chkAcepto">
+                Sí, acepto que la información que ingresaré es correcta.
+              </label>
+              <small id="aceptoHelp" class="form-text text-muted">
+                Debe marcar esta casilla para continuar.
+              </small>
+            </div>
+          </div>
+
+          <div class="aviso-card-footer text-center">
+            <small class="text-muted">Ministerio de Educación, Deporte y Cultura— EPJA</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="/js/aviso-aceptacion.js?v=3"></script>
