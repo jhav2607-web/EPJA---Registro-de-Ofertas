@@ -64,12 +64,15 @@
           Institución Educativa
         </button>
         <button type="button" class="epja-nav-btn" data-view="view-op2" aria-controls="view-op2">
+          Autoridad Educativa
+        </button>
+        <button type="button" class="epja-nav-btn" data-view="view-op3" aria-controls="view-op2">
           Oferta Educativa
         </button>
       </nav>
 
       <div class="epja-sidebar-footer">
-        <small>MINEDEC — EPJA</small>
+        <small>MINEDEC - EPJA</small>
       </div>
     </aside>
 
@@ -77,8 +80,119 @@
     <main class="epja-main" id="epja-main" tabindex="-1">
       <!-- Panel por defecto visible -->
       <section id="view-op1" class="epja-view" aria-labelledby="lbl-op1">
-        <h2 id="lbl-op1">Opción 1</h2>
-        <p>Contenido de la opción 1. Aquí podrás renderizar formularios o componentes.</p>
+         <div id="mod-institucion" class="epja-panel" aria-labelledby="titulo-institucion">
+        <div class="epja-panel-header">
+          <h2 id="titulo-institucion" class="epja-panel-title">
+            INFORMACIÓN DE INSTITUCIÓN EDUCATIVA
+          </h2>
+        </div>
+
+        <div class="epja-panel-body">
+          <div class="epja-box">
+            <form id="frmInstitucion" class="epja-form -tight" novalidate>
+              <label for="txtAmie" class="epja-label">Ingrese un código AMIE *</label>
+              <div class="epja-inline">
+                <input
+                  type="text"
+                  id="txtAmie"
+                  name="txtAmie"
+                  class="epja-input"
+                  maxlength="8"
+                  placeholder="Ejemplo: 15H00329"
+                  aria-describedby="hint-amie"
+                  required
+                  inputmode="latin"
+                  autocomplete="off"
+                />
+                <button type="submit" id="btnBuscar" class="epja-btn" aria-live="polite">
+                  Buscar
+                </button>
+              </div>
+              <p id="hint-amie" class="epja-hint">
+                El código AMIE debe contener hasta 8 caracteres en mayúsculas (A-Z, 0-9).
+              </p>
+              <div id="msjInstitucion" class="epja-msg" role="status" aria-live="polite"></div>
+            </form>
+
+            <div id="infoInstitucion" class="epja-result hidden" aria-labelledby="subtitulo-institucion">
+              
+
+              <div class="epja-field">
+                <label for="nombreIE">Nombre de la Institución Educativa</label>
+                <input type="text" id="nombreIE" readonly />
+              </div>
+
+              <div class="epja-grid">
+                <div class="epja-field">
+                  <label for="sostenimiento">Sostenimiento</label>
+                  <input type="text" id="sostenimiento" readonly />
+                </div>
+                <div class="epja-field">
+                  <label for="zona">Zona</label>
+                  <input type="text" id="zona" readonly />
+                </div>
+                <div class="epja-field">
+                  <label for="distrito">Distrito</label>
+                  <input type="text" id="distrito" readonly />
+                </div>
+              </div>
+
+              <div class="epja-grid">
+                <div class="epja-field">
+                  <label for="provincia">Provincia</label>
+                  <input type="text" id="provincia" readonly />
+                </div>
+                <div class="epja-field">
+                  <label for="canton">Cantón</label>
+                  <input type="text" id="canton" readonly />
+                </div>
+                <div class="epja-field">
+                  <label for="parroquia">Parroquia</label>
+                  <input type="text" id="parroquia" readonly />
+                </div>
+              </div>
+
+              <div class="epja-field">
+                <label for="tipo">Tipo</label>
+                <input type="text" id="tipo" readonly />
+              </div>
+
+              <!-- ===== Extensiones/Establecimientos (se muestra solo si Tipo = MATRIZ) ===== -->
+              <div id="bloqueExtensiones" class="epja-field hidden" aria-live="polite">
+                <label>¿La Institución Educativa tiene extensiones o establecimientos?</label>
+
+                <!-- Radios en línea -->
+                <div class="epja-inline-options" role="radiogroup" aria-label="Tiene extensiones">
+                  <label class="epja-radio">
+                    <input type="radio" name="tieneExt" id="tieneExtSi" value="SI" />
+                    <span>Sí</span>
+                  </label>
+                  <label class="epja-radio">
+                    <input type="radio" name="tieneExt" id="tieneExtNo" value="NO" />
+                    <span>No</span>
+                  </label>
+                </div>
+
+                <!-- Sub-bloque: número de extensiones -->
+                <div id="bloqueNumExt" class="epja-field hidden">
+                  <label for="numExtensiones">Ingrese el número de extensiones</label>
+                  <input
+                    type="text"
+                    id="numExtensiones"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    placeholder="Ejemplo: 3"
+                    aria-describedby="hint-numext"
+                    maxlength="3"
+                  />
+                  <small id="hint-numext" class="epja-hint">Solo números enteros (0–999).</small>
+                  <div id="msgNumExt" class="epja-msg"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </section>
 
       <!-- Paneles ocultos inicialmente -->

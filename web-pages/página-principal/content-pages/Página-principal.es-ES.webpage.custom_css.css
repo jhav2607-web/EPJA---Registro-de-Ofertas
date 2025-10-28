@@ -115,3 +115,224 @@ body.epja-app-active #epja-app { display: block; }
   /* comentar si no quieres sticky */
   /* #epja-app .epja-sidebar{ position: sticky; top: calc(var(--epja-outer-gap)); } */
 }
+
+/* =========================================================
+   EPJA — Módulo Institución Educativa (coherencia con layout)
+   ========================================================= */
+
+/* Panel principal dentro del main de la app (alinea y limita ancho) */
+.epja-panel {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto 24px auto; /* centrado y separación inferior */
+}
+
+/* Cabecera del panel con título centrado y color institucional */
+.epja-panel-header { padding: 12px 18px; }
+.epja-panel-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0b3d91;
+  text-align: center;
+  letter-spacing: .3px;
+  margin: 0;
+}
+
+/* Cuerpo del panel con borde y sombra interior como en imagen 2 */
+.epja-panel-body {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(9, 44, 106, 0.12);
+  box-shadow: 0 2px 0 rgba(11, 61, 145, 0.06) inset, 0 1px 0 rgba(0,0,0,0.03);
+  padding: 14px;
+}
+
+/* Caja gris clara interna para inputs (respira dentro del panel) */
+.epja-box {
+  background: #f9fbfe;
+  border: 1px solid rgba(9, 44, 106, 0.10);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+/* Formulario compacto */
+.epja-form.-tight { margin-bottom: 12px; }
+
+/* Línea con input expandible y botón al costado */
+.epja-inline { display: flex; gap: 12px; align-items: center; }
+
+/* Input con borde suave gris-azulado; mismo alto que botón */
+.epja-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #cfd6e4 !important;
+  background: #edf3fb;
+  font-size: 1rem;
+  outline: none;
+}
+.epja-input:focus {
+  border-color: #0b3d91 !important;
+  box-shadow: 0 0 0 3px rgba(11, 61, 145, .12);
+}
+
+/* Botón institucional */
+.epja-btn {
+  background: #0b3d91;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .2s ease;
+  white-space: nowrap;
+}
+.epja-btn:hover { background: #092c6a; }
+.epja-btn[disabled] { opacity: .7; cursor: not-allowed; }
+
+/* Texto auxiliar */
+.epja-label { font-weight: 600; display: block; margin-bottom: 6px; }
+.epja-hint { font-size: .9rem; color: #5d6b85; margin-top: 6px; }
+
+/* Mensajes de estado */
+.epja-msg { margin-top: 10px; font-size: .95rem; }
+.epja-msg.-ok { color: #17663a; }
+.epja-msg.-warn { color: #8c6a00; }
+.epja-msg.-err { color: #8b1a1a; }
+
+/* Bloque de resultados */
+.epja-result { margin-top: 14px; }
+
+.epja-subtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #163b6f;
+  margin: 0 0 12px 0;
+}
+
+/* Campos estándar de la app */
+.epja-field { display: flex; flex-direction: column; margin-bottom: 12px; }
+.epja-field label { font-weight: 600; margin-bottom: 4px; color: #2d3b57; }
+.epja-field input {
+  padding: 10px 12px;
+  border: 1px solid #cfd6e4;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 1rem;
+}
+
+/* Grilla responsiva 3 columnas (colapsa a 1 en móviles) */
+.epja-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 920px) { .epja-grid { grid-template-columns: 1fr; } }
+
+/* Utilidades */
+.hidden { display: none !important; }
+/* Evitar paddings de secciones genéricas: este módulo usa panel */
+#mod-institucion.epja-panel { padding: 0; }
+
+/* ===============================
+   EPJA — Resultados en formato vertical
+   =============================== */
+#infoInstitucion .epja-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#infoInstitucion .epja-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#infoInstitucion input[readonly] {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid #cfd6e4;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+/* ===== EPJA — Extensiones/Establecimientos =====
+   Radios en línea y consistencia visual del campo numérico
+------------------------------------------------------ */
+.epja-inline-options{
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.epja-radio{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  color: #2d3b57;
+}
+#bloqueNumExt input{
+  border: 1px solid #cfd6e4;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  font-size: 1rem;
+}
+#bloqueNumExt input:focus{
+  border-color: #0b3d91 !important;
+  box-shadow: 0 0 0 3px rgba(11,61,145,.12);
+}
+.epja-msg.-err{ color: #8b1a1a; }
+.hidden{ display: none !important; }
+
+/* Refuerzo por si el tema intenta ocultar el resultado */
+#infoInstitucion.epja-result{ display:block !important; visibility:visible !important; }
+#infoInstitucion input[readonly]{ background:#ffffff; color:#0f172a; }
+
+/* ===== EPJA — Alinear "Número de extensiones" como el campo Tipo ===== */
+#bloqueNumExt{
+  display: flex;
+  flex-direction: column;   /* apila label, input, hint */
+  gap: 6px;
+}
+
+#bloqueNumExt label{
+  display: block;
+  font-weight: 600;
+  color: #2d3b57;
+  margin-bottom: 2px;       /* igual que otros labels */
+}
+
+#bloqueNumExt input#numExtensiones{
+  width: 100%;              /* ocupa todo el ancho del panel */
+  background: #fff;
+  border: 1px solid #cfd6e4;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+}
+
+#bloqueNumExt input#numExtensiones:focus{
+  border-color: #0b3d91 !important;
+  box-shadow: 0 0 0 3px rgba(11,61,145,.12);
+}
+
+#bloqueNumExt .epja-hint{
+  display: block;           /* forzar a línea propia (debajo del input) */
+  margin-top: 2px;
+  color: #5d6b85;
+  font-size: .9rem;
+}
+
+/* Por si hereda alguna disposición en fila de un contenedor padre */
+#bloqueExtensiones .epja-field,
+#bloqueExtensiones .epja-grid{
+  display: block;
+}
+
