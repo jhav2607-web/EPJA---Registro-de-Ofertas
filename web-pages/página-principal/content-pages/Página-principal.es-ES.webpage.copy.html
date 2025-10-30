@@ -66,7 +66,7 @@
         <button type="button" class="epja-nav-btn" data-view="view-op2" aria-controls="view-op2">
           Autoridad Educativa
         </button>
-        <button type="button" class="epja-nav-btn" data-view="view-op3" aria-controls="view-op2">
+        <button type="button" class="epja-nav-btn" data-view="view-op3" aria-controls="view-op3">
           Oferta Educativa
         </button>
       </nav>
@@ -76,131 +76,378 @@
       </div>
     </aside>
 
-    <!-- Contenido principal -->
+   <!-- Contenido principal -->
     <main class="epja-main" id="epja-main" tabindex="-1">
-      <!-- Panel por defecto visible -->
-      <section id="view-op1" class="epja-view" aria-labelledby="lbl-op1">
-         <div id="mod-institucion" class="epja-panel" aria-labelledby="titulo-institucion">
-        <div class="epja-panel-header">
-          <h2 id="titulo-institucion" class="epja-panel-title">
-            INFORMACIÓN DE INSTITUCIÓN EDUCATIVA
-          </h2>
-        </div>
+      <!-- =========================================================
+          VISTA 1 — INSTITUCIÓN EDUCATIVA
+      ========================================================= -->
+      <section id="view-op1" class="epja-view is-active" aria-labelledby="lbl-op1">
+        <div id="mod-institucion" class="epja-panel" aria-labelledby="titulo-institucion">
+          <div class="epja-panel-header">
+            <h2 id="titulo-institucion" class="epja-panel-title">
+              INFORMACIÓN DE INSTITUCIÓN EDUCATIVA
+            </h2>
+          </div>
 
-        <div class="epja-panel-body">
-          <div class="epja-box">
-            <form id="frmInstitucion" class="epja-form -tight" novalidate>
-              <label for="txtAmie" class="epja-label">Ingrese un código AMIE *</label>
-              <div class="epja-inline">
-                <input
-                  type="text"
-                  id="txtAmie"
-                  name="txtAmie"
-                  class="epja-input"
-                  maxlength="8"
-                  placeholder="Ejemplo: 15H00329"
-                  aria-describedby="hint-amie"
-                  required
-                  inputmode="latin"
-                  autocomplete="off"
-                />
-                <button type="submit" id="btnBuscar" class="epja-btn" aria-live="polite">
-                  Buscar
-                </button>
-              </div>
-              <p id="hint-amie" class="epja-hint">
-                El código AMIE debe contener hasta 8 caracteres en mayúsculas (A-Z, 0-9).
-              </p>
-              <div id="msjInstitucion" class="epja-msg" role="status" aria-live="polite"></div>
-            </form>
-
-            <div id="infoInstitucion" class="epja-result hidden" aria-labelledby="subtitulo-institucion">
-              
-
-              <div class="epja-field">
-                <label for="nombreIE">Nombre de la Institución Educativa</label>
-                <input type="text" id="nombreIE" readonly />
-              </div>
-
-              <div class="epja-grid">
-                <div class="epja-field">
-                  <label for="sostenimiento">Sostenimiento</label>
-                  <input type="text" id="sostenimiento" readonly />
-                </div>
-                <div class="epja-field">
-                  <label for="zona">Zona</label>
-                  <input type="text" id="zona" readonly />
-                </div>
-                <div class="epja-field">
-                  <label for="distrito">Distrito</label>
-                  <input type="text" id="distrito" readonly />
-                </div>
-              </div>
-
-              <div class="epja-grid">
-                <div class="epja-field">
-                  <label for="provincia">Provincia</label>
-                  <input type="text" id="provincia" readonly />
-                </div>
-                <div class="epja-field">
-                  <label for="canton">Cantón</label>
-                  <input type="text" id="canton" readonly />
-                </div>
-                <div class="epja-field">
-                  <label for="parroquia">Parroquia</label>
-                  <input type="text" id="parroquia" readonly />
-                </div>
-              </div>
-
-              <div class="epja-field">
-                <label for="tipo">Tipo</label>
-                <input type="text" id="tipo" readonly />
-              </div>
-
-              <!-- ===== Extensiones/Establecimientos (se muestra solo si Tipo = MATRIZ) ===== -->
-              <div id="bloqueExtensiones" class="epja-field hidden" aria-live="polite">
-                <label>¿La Institución Educativa tiene extensiones o establecimientos?</label>
-
-                <!-- Radios en línea -->
-                <div class="epja-inline-options" role="radiogroup" aria-label="Tiene extensiones">
-                  <label class="epja-radio">
-                    <input type="radio" name="tieneExt" id="tieneExtSi" value="SI" />
-                    <span>Sí</span>
-                  </label>
-                  <label class="epja-radio">
-                    <input type="radio" name="tieneExt" id="tieneExtNo" value="NO" />
-                    <span>No</span>
-                  </label>
-                </div>
-
-                <!-- Sub-bloque: número de extensiones -->
-                <div id="bloqueNumExt" class="epja-field hidden">
-                  <label for="numExtensiones">Ingrese el número de extensiones</label>
+          <div class="epja-panel-body">
+            <div class="epja-box">
+              <form id="frmInstitucion" class="epja-form -tight" novalidate>
+                <label for="txtAmie" class="epja-label">Ingrese un código AMIE *</label>
+                <div class="epja-inline">
                   <input
                     type="text"
-                    id="numExtensiones"
-                    inputmode="numeric"
+                    id="txtAmie"
+                    name="txtAmie"
+                    class="epja-input"
+                    maxlength="8"
+                    placeholder="Ejemplo: 15H00329"
+                    aria-describedby="hint-amie"
+                    required
+                    inputmode="latin"
                     autocomplete="off"
-                    placeholder="Ejemplo: 3"
-                    aria-describedby="hint-numext"
-                    maxlength="3"
                   />
-                  <small id="hint-numext" class="epja-hint">Solo números enteros (0–999).</small>
-                  <div id="msgNumExt" class="epja-msg"></div>
+                  <button type="submit" id="btnBuscar" class="epja-btn" aria-live="polite">
+                    Buscar
+                  </button>
+                </div>
+                <p id="hint-amie" class="epja-hint">
+                  El código AMIE debe contener hasta 8 caracteres en mayúsculas (A-Z, 0-9).
+                </p>
+                <div id="msjInstitucion" class="epja-msg" role="status" aria-live="polite"></div>
+              </form>
+
+              <!-- Bloque que se llena con la consulta -->
+              <div id="infoInstitucion" class="epja-result hidden" aria-labelledby="subtitulo-institucion">
+                <div class="epja-field">
+                  <label for="nombreIE">Nombre de la Institución Educativa</label>
+                  <input type="text" id="nombreIE" readonly />
+                </div>
+
+                <div class="epja-grid">
+                  <div class="epja-field">
+                    <label for="sostenimiento">Sostenimiento</label>
+                    <input type="text" id="sostenimiento" readonly />
+                  </div>
+                  <div class="epja-field">
+                    <label for="zona">Zona</label>
+                    <input type="text" id="zona" readonly />
+                  </div>
+                  <div class="epja-field">
+                    <label for="distrito">Distrito</label>
+                    <input type="text" id="distrito" readonly />
+                  </div>
+                </div>
+
+                <div class="epja-grid">
+                  <div class="epja-field">
+                    <label for="provincia">Provincia</label>
+                    <input type="text" id="provincia" readonly />
+                  </div>
+                  <div class="epja-field">
+                    <label for="canton">Cantón</label>
+                    <input type="text" id="canton" readonly />
+                  </div>
+                  <div class="epja-field">
+                    <label for="parroquia">Parroquia</label>
+                    <input type="text" id="parroquia" readonly />
+                  </div>
+                </div>
+
+                <div class="epja-field">
+                  <label for="tipo">Tipo</label>
+                  <input type="text" id="tipo" readonly />
+                </div>
+
+                <!-- ===== Extensiones/Establecimientos (solo si Tipo = MATRIZ) ===== -->
+                <div id="bloqueExtensiones" class="epja-field hidden" aria-live="polite">
+                  <label>¿La Institución Educativa tiene extensiones o establecimientos?</label>
+
+                  <div class="epja-inline-options" role="radiogroup" aria-label="Tiene extensiones">
+                    <label class="epja-radio">
+                      <input type="radio" name="tieneExt" id="tieneExtSi" value="SI" />
+                      <span>Sí</span>
+                    </label>
+                    <label class="epja-radio">
+                      <input type="radio" name="tieneExt" id="tieneExtNo" value="NO" />
+                      <span>No</span>
+                    </label>
+                  </div>
+
+                  <!-- Sub-bloque: número de extensiones -->
+                  <div id="bloqueNumExt" class="epja-field hidden">
+                    <label for="numExtensiones">Ingrese el número de extensiones y establecimientos</label>
+                    <input
+                      type="text"
+                      id="numExtensiones"
+                      inputmode="numeric"
+                      autocomplete="off"
+                      placeholder="Ejemplo: 3"
+                      aria-describedby="hint-numext"
+                      maxlength="3"
+                    />
+                    <small id="hint-numext" class="epja-hint">Solo números enteros (1–999).</small>
+                    <div id="msgNumExt" class="epja-msg"></div>
+                  </div>
+
+                  <!-- Acordeón dinámico -->
+                  <div
+                    id="extPanelsContainer"
+                    class="epja-accordion hidden"
+                    aria-live="polite"
+                    aria-relevant="additions removals"
+                    aria-label="Detalle de extensiones o establecimientos"
+                  >
+                    <!-- JS inserta aquí -->
+                  </div>
+                </div>
+
+                <!-- Botones del paso 1 -->
+                <div class="epja-actions">
+                  <button type="button" id="btnNextInstitucion" class="epja-btn">
+                    Siguiente
+                  </button>
+                  <div id="msgValInstitucion" class="epja-msg -err hidden"></div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div><!-- /#mod-institucion -->
       </section>
+      <!-- =========================================================
+          FIN VISTA 1
+      ========================================================= -->
 
-      <!-- Paneles ocultos inicialmente -->
+
+      <!-- =========================================================
+          VISTA 2 — AUTORIDAD EDUCATIVA
+      ========================================================= -->
       <section id="view-op2" class="epja-view is-hidden" aria-labelledby="lbl-op2">
-        <h2 id="lbl-op2">Opción 2</h2>
-        <p>Contenido para la Opción 2.</p>
-      </section>
+        <div class="epja-panel" aria-labelledby="lbl-op2">
+          <div class="epja-panel-header">
+            <h2 id="lbl-op2" class="epja-panel-title">
+              INFORMACIÓN DE AUTORIDAD EDUCATIVA
+            </h2>
+          </div>
 
+          <div class="epja-panel-body">
+            <p class="epja-hint" style="margin-bottom:1rem;" center>
+              Revise las instituciones registradas en el paso anterior y, si corresponde, ingrese los datos de la autoridad responsable.
+            </p>
+
+            <!-- Bloque modo misma autoridad -->
+            <div class="epja-authority-mode">
+              <label class="epja-switch">
+                <input type="checkbox" id="chkMismaAutoridad" />
+                <span>Usar la misma autoridad para todas las instituciones</span>
+              </label>
+              <p class="epja-help">
+                Si activa esta opción, los datos ingresados abajo se aplicarán a todas las instituciones mostradas en la tabla.
+              </p>
+            </div>
+
+            <!-- Tabla resumen -->
+            <div class="epja-table-wrapper">
+              <table class="epja-table" id="tblAutoridadInstituciones" aria-describedby="lbl-op2">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 3rem;">#</th>
+                    <th scope="col">Nombre de la Institución Educativa</th>
+                    <th scope="col" style="width: 10rem;">Tipo</th>
+                    <th scope="col" style="width: 9rem;">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- se llena por JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Bloque de datos de la autoridad (modo "misma autoridad") -->
+            <div class="epja-form-block" id="bloqueAutoridadGlobal" style="display:none; margin-top:1.5rem;">
+              <h3 class="epja-subtitle">Datos de la autoridad educativa</h3>
+
+              <!-- Tipo de documento -->
+              <div class="epja-field">
+                <label for="autTipoDoc">Tipo de documento de identificación *</label>
+                <select id="autTipoDoc" class="epja-input">
+                  <option value="">Seleccione una opción</option>
+                  <option value="cedula">Cédula Ecuatoriana</option>
+                  <option value="pasaporte">Pasaporte</option>
+                  <option value="extranjera">Identificación Extranjera</option>
+                </select>
+                <small class="epja-help">Seleccione el tipo de documento según corresponda.</small>
+              </div>
+
+              <!-- Bloque: Cédula -->
+              <div id="bloqueCedula" class="epja-docblock hidden" aria-live="polite">
+                <div class="epja-grid-autoridad">
+                  <div class="epja-field">
+                    <label for="autCedula">Cédula *</label>
+                    <input type="text" id="autCedula" maxlength="10" inputmode="numeric" class="epja-input" placeholder="Ej: 0102030405" />
+                    <small class="epja-help" id="msgCedula"></small>
+                  </div>
+                  <div class="epja-field epja-field-inline">
+                    <label class="epja-label-invisible" for="btnBuscarCedula">.</label>
+                    <button type="button" id="btnBuscarCedula" class="epja-btn epja-btn-sm">Buscar en Registro Civil</button>
+                  </div>
+                </div>
+
+                <div class="epja-field">
+                  <label for="autNombreCompleto">Nombres y apellidos</label>
+                  <input type="text" id="autNombreCompleto" class="epja-input" placeholder="Se completará desde Registro Civil" />
+                </div>
+              </div>
+
+              <!-- Bloque: Pasaporte -->
+              <div id="bloquePasaporte" class="epja-docblock hidden">
+                <div class="epja-field">
+                  <label for="autPasaporte">Pasaporte *</label>
+                  <input type="text" id="autPasaporte" class="epja-input" maxlength="20" placeholder="Ej: P1234567" />
+                  <small class="epja-help">Puede ingresar letras, números, puntos o guiones. Mínimo 5 y máximo 20 caracteres.</small>
+                </div>
+                <div class="epja-field">
+                  <label for="autNombreCompletoPas">Nombres y apellidos *</label>
+                  <input type="text" id="autNombreCompletoPas" class="epja-input" placeholder="Ingrese los nombres completos" />
+                </div>
+              </div>
+
+              <!-- Bloque: Identificación Extranjera -->
+              <div id="bloqueExtranjera" class="epja-docblock hidden">
+                <div class="epja-field">
+                  <label for="autExtranjera">Identificación Extranjera *</label>
+                  <input type="text" id="autExtranjera" class="epja-input" maxlength="20" placeholder="Ingrese su identificación" />
+                  <small class="epja-help">Puede ingresar letras, números, puntos o guiones. Mínimo 5 y máximo 20 caracteres.</small>
+                </div>
+                <div class="epja-field">
+                  <label for="autNombreCompletoExt">Nombres y apellidos *</label>
+                  <input type="text" id="autNombreCompletoExt" class="epja-input" placeholder="Ingrese los nombres completos" />
+                </div>
+              </div>
+
+              <!-- Correos y celular -->
+              <div class="epja-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <div class="epja-field">
+                  <label for="autCorreoPersonal">Correo personal *</label>
+                  <input type="email" id="autCorreoPersonal" class="epja-input" placeholder="correo@dominio.com" />
+                </div>
+                <div class="epja-field">
+                  <label for="autCorreoInstitucional">Correo institucional *</label>
+                  <input type="email" id="autCorreoInstitucional" class="epja-input" placeholder="usuario@educacion.gob.ec" />
+                </div>
+              </div>
+              <div class="epja-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <div class="epja-field">
+                  <label for="autCelular">Número celular de contacto *</label>
+                  <input type="text" id="autCelular" class="epja-input" inputmode="numeric" maxlength="10" placeholder="Ej: 0999999999" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="epja-actions" style="margin-top:1.5rem;">
+              <!--<button type="button" id="btnAutoridadAnterior" class="epja-btn epja-btn-secondary">Anterior</button>-->
+              <button type="button" id="btnAutoridadSiguiente" class="epja-btn">Guardar y continuar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================================
+            MODAL — AUTORIDAD POR INSTITUCIÓN
+        ========================================================= -->
+        <div id="epja-modal-institucion" class="epja-modal" aria-hidden="true" role="dialog" aria-modal="false">
+          <div class="epja-modal-overlay" data-close="modal"></div>
+          <div class="epja-modal-dialog" role="document" aria-labelledby="epja-modal-title">
+            <header class="epja-modal-header">
+              <h3 id="epja-modal-title">Autoridad de la institución</h3>
+              <button type="button" class="epja-modal-close" id="epjaModalClose" aria-label="Cerrar">&times;</button>
+            </header>
+
+            <div class="epja-modal-body" id="epjaModalBody">
+              <p class="epja-subtitle" id="epjaModalInstNombre"></p>
+
+              <div class="epja-field">
+                <label for="modTipoDoc">Tipo de documento de identificación *</label>
+                <select id="modTipoDoc" class="epja-input">
+                  <option value="">Seleccione una opción</option>
+                  <option value="cedula">Cédula Ecuatoriana</option>
+                  <option value="pasaporte">Pasaporte</option>
+                  <option value="extranjera">Identificación Extranjera</option>
+                </select>
+              </div>
+
+              <!-- Cédula en modal -->
+              <div id="modBloqueCedula" class="epja-docblock hidden">
+                <div class="epja-grid-autoridad">
+                  <div class="epja-field">
+                    <label for="modCedula">Cédula *</label>
+                    <input type="text" id="modCedula" maxlength="10" inputmode="numeric" class="epja-input" />
+                    <small class="epja-help" id="modMsgCedula"></small>
+                  </div>
+                  <div class="epja-field epja-field-inline">
+                    <label class="epja-label-invisible" for="modBtnBuscarCedula">.</label>
+                    <button type="button" id="modBtnBuscarCedula" class="epja-btn epja-btn-sm">Buscar en Registro Civil</button>
+                  </div>
+                </div>
+                <div class="epja-field">
+                  <label for="modNombreCompleto">Nombres y apellidos</label>
+                  <input type="text" id="modNombreCompleto" class="epja-input" readonly/>
+                </div>
+              </div>
+
+              <!-- Pasaporte en modal -->
+              <div id="modBloquePasaporte" class="epja-docblock hidden">
+                <div class="epja-field">
+                  <label for="modPasaporte">Pasaporte *</label>
+                  <input type="text" id="modPasaporte" class="epja-input" maxlength="20" />
+                </div>
+                <div class="epja-field">
+                  <label for="modNombreCompletoPas">Nombres y apellidos *</label>
+                  <input type="text" id="modNombreCompletoPas" class="epja-input" />
+                </div>
+              </div>
+
+              <!-- Extranjera en modal -->
+              <div id="modBloqueExtranjera" class="epja-docblock hidden">
+                <div class="epja-field">
+                  <label for="modExtranjera">Identificación Extranjera *</label>
+                  <input type="text" id="modExtranjera" class="epja-input" maxlength="20" />
+                </div>
+                <div class="epja-field">
+                  <label for="modNombreCompletoExt">Nombres y apellidos *</label>
+                  <input type="text" id="modNombreCompletoExt" class="epja-input" />
+                </div>
+              </div>
+
+              <div class="epja-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+                <div class="epja-field">
+                  <label for="modCorreoPersonal">Correo personal *</label>
+                  <input type="email" id="modCorreoPersonal" class="epja-input" />
+                </div>
+                <div class="epja-field">
+                  <label for="modCorreoInstitucional">Correo institucional *</label>
+                  <input type="email" id="modCorreoInstitucional" class="epja-input" />
+                </div>
+              </div>
+              <div class="epja-field">
+                <label for="modCelular">Número celular *</label>
+                <input type="text" id="modCelular" class="epja-input" maxlength="10" inputmode="numeric" />
+              </div>
+            </div>
+
+            <footer class="epja-modal-footer">
+              <button type="button" class="epja-btn epja-btn-secondary" data-close="modal">Cerrar</button>
+              <button type="button" id="modBtnGuardar" class="epja-btn">Guardar datos</button>
+            </footer>
+          </div>
+        </div>
+      </section>
+      <!-- =========================================================
+          FIN VISTA 2
+      ========================================================= -->
+
+      <!-- =========================================================
+          VISTA 3 — OFERTA EDUCATIVA (placeholder)
+      ========================================================= -->
       <section id="view-op3" class="epja-view is-hidden" aria-labelledby="lbl-op3">
         <h2 id="lbl-op3">Opción 3</h2>
         <p>Contenido para la Opción 3.</p>

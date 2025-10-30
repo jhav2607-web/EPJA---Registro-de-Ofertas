@@ -1,133 +1,267 @@
-/* ===== AVISO ===== */
-#epja-aviso { padding: 32px 16px; display: flex; justify-content: center; background: transparent; }
-#epja-aviso .epja-card {
-  max-width: 980px; width: 100%; background: #fff; border-radius: 16px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.08); padding: 32px 28px;
+/* =========================================================
+   EPJA — AVISO INICIAL
+========================================================= */
+#epja-aviso {
+  padding: 32px 16px;
+  display: flex;
+  justify-content: center;
+  background: transparent;
 }
-#epja-aviso .epja-title { font-size: clamp(28px,4vw,48px); line-height: 1.15; margin: 0 0 8px; color: #2f2b8f; font-weight: 700; text-align: center; }
-#epja-aviso .epja-subtitle { font-size: clamp(16px,2.2vw,22px); line-height: 1.4; margin: 0 0 24px; color: #4a5568; text-align: center; }
+#epja-aviso .epja-card {
+  max-width: 980px;
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  padding: 32px 28px;
+}
+#epja-aviso .epja-title {
+  font-size: clamp(28px,4vw,48px);
+  line-height: 1.15;
+  margin: 0 0 8px;
+  color: #2f2b8f;
+  font-weight: 700;
+  text-align: center;
+}
+#epja-aviso .epja-subtitle {
+  font-size: clamp(16px,2.2vw,22px);
+  line-height: 1.4;
+  margin: 0 0 24px;
+  color: #4a5568;
+  text-align: center;
+}
 #epja-aviso .epja-text { margin-bottom: 20px; }
-#epja-aviso .epja-text p { font-size: clamp(16px,2vw,20px); line-height: 1.8; text-align: justify; margin: 0; color: #1a202c; }
+#epja-aviso .epja-text p {
+  font-size: clamp(16px,2vw,20px);
+  line-height: 1.8;
+  text-align: justify;
+  margin: 0;
+  color: #1a202c;
+}
 #epja-aviso .epja-text strong { font-weight: 800; color: #0b2e8a; }
-#epja-aviso .epja-consent { display: flex; align-items: center; gap: 16px; flex-wrap: nowrap; margin-top: 24px; }
-#epja-aviso .epja-checkbox { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; font-size: clamp(15px,1.8vw,18px); color: #1a202c; margin: 0; }
-
+#epja-aviso .epja-consent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+  margin-top: 24px;
+}
+#epja-aviso .epja-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: clamp(15px,1.8vw,18px);
+  color: #1a202c;
+  margin: 0;
+}
 /* Checkbox moderno */
 #epja-aviso .epja-checkbox input[type="checkbox"]{
-  appearance: none; -webkit-appearance: none;
-  inline-size: 22px; block-size: 22px; border: 2px solid #a0aec0; border-radius: 6px; background: #fff;
-  position: relative; cursor: pointer; transition: all .25s ease; box-shadow: 0 1px 2px rgba(0,0,0,.08);
+  appearance: none;
+  -webkit-appearance: none;
+  inline-size: 22px;
+  block-size: 22px;
+  border: 2px solid #a0aec0;
+  border-radius: 6px;
+  background: #fff;
+  position: relative;
+  cursor: pointer;
+  transition: all .25s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,.08);
 }
-#epja-aviso .epja-checkbox input[type="checkbox"]:hover { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.15); }
-#epja-aviso .epja-checkbox input[type="checkbox"]:checked { background: #2f2b8f; border-color: #2f2b8f; box-shadow: 0 0 0 3px rgba(47,43,143,.15); }
+#epja-aviso .epja-checkbox input[type="checkbox"]:hover {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79,70,229,.15);
+}
+#epja-aviso .epja-checkbox input[type="checkbox"]:checked {
+  background: #2f2b8f;
+  border-color: #2f2b8f;
+  box-shadow: 0 0 0 3px rgba(47,43,143,.15);
+}
 #epja-aviso .epja-checkbox input[type="checkbox"]::after{
-  content:""; position:absolute; top:3px; left:6px; width:6px; height:12px;
-  border-right:2px solid #fff; border-bottom:2px solid #fff; transform: rotate(45deg) scale(0); opacity:0; transition: all .25s ease;
+  content:"";
+  position:absolute;
+  top:3px;
+  left:6px;
+  width:6px;
+  height:12px;
+  border-right:2px solid #fff;
+  border-bottom:2px solid #fff;
+  transform: rotate(45deg) scale(0);
+  opacity:0;
+  transition: all .25s ease;
 }
-#epja-aviso .epja-checkbox input[type="checkbox"]:checked::after{ transform: rotate(45deg) scale(1); opacity:1; }
-
-#epja-aviso .epja-help { margin: 0; font-size: 14px; line-height: 1.4; color: #6b7280; white-space: nowrap; font-style: italic; }
-#epja-aviso .epja-footer { margin-top: 28px; text-align: center; font-size: 14px; color: #6b7280; }
+#epja-aviso .epja-checkbox input[type="checkbox"]:checked::after{
+  transform: rotate(45deg) scale(1);
+  opacity:1;
+}
+#epja-aviso .epja-help {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #6b7280;
+  white-space: nowrap;
+  font-style: italic;
+}
+#epja-aviso .epja-footer {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
 #epja-aviso.epja-fade-out { opacity: 0; transition: opacity 220ms ease; }
-@media (max-width:480px){ #epja-aviso .epja-card{ padding:24px 18px; border-radius:12px; } #epja-aviso .epja-consent{ flex-wrap:wrap; gap:8px; } #epja-aviso .epja-help{ white-space: normal; } }
+@media (max-width:480px){
+  #epja-aviso .epja-card{ padding:24px 18px; border-radius:12px; }
+  #epja-aviso .epja-consent{ flex-wrap:wrap; gap:8px; }
+  #epja-aviso .epja-help{ white-space: normal; }
+}
 
-/* ===== APP / MENÚ LATERAL ===== */
-/* 1) Por defecto, app oculta */
+/* =========================================================
+   APP / SHELL / MENÚ LATERAL
+========================================================= */
+/* oculta app por defecto */
 #epja-app { display: none; }
-
-/* 2) Al activar, mostrar app (no tocamos nada más del portal) */
 body.epja-app-active #epja-app { display: block; }
 
-/* 3) Layout y estilos del shell */
-#epja-app { padding: 24px; margin: 32px auto; max-width: 1400px; }
+#epja-app {
+  padding: 24px;
+  margin: 32px auto;
+  max-width: 1400px;
+}
 #epja-app .epja-app-shell {
-  display: grid; grid-template-columns: 280px 1fr; gap: 24px;
-  border-radius: 18px; padding: 24px; background: #f7f8fb; box-shadow: 0 10px 28px rgba(16,24,40,.1);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  border-radius: 18px;
+  padding: 24px;
+  background: #f7f8fb;
+  box-shadow: 0 10px 28px rgba(16,24,40,.1);
 }
 
-/* Sidebar moderno */
+/* Sidebar */
 #epja-app .epja-sidebar{
   background: linear-gradient(160deg,#0b2e8a 0%,#2f2b8f 45%,#4f46e5 100%);
-  color:#fff; border-radius:16px; padding:24px 20px; display:flex; flex-direction:column;
-  box-shadow:0 12px 28px rgba(16,24,40,.2); backdrop-filter:saturate(140%) blur(8px);
+  color:#fff;
+  border-radius:16px;
+  padding:24px 20px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 12px 28px rgba(16,24,40,.2);
+  backdrop-filter:saturate(140%) blur(8px);
 }
-#epja-app .epja-brand{ display:flex; align-items:baseline; gap:10px; margin:2px 0 14px 2px; }
-#epja-app .epja-logo{ display:inline-block; font-weight:800; font-size:18px; line-height:1; padding:6px 10px; border-radius:12px; background:rgba(255,255,255,.14); letter-spacing:.4px; }
+#epja-app .epja-brand{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  margin:2px 0 14px 2px;
+}
+#epja-app .epja-logo{
+  display:inline-block;
+  font-weight:800;
+  font-size:18px;
+  line-height:1;
+  padding:6px 10px;
+  border-radius:12px;
+  background:rgba(255,255,255,.14);
+  letter-spacing:.4px;
+}
 #epja-app .epja-brand-text{ font-size:14px; opacity:.9; }
-#epja-app .epja-nav{ display:flex; flex-direction:column; gap:12px; margin:16px 0; }
-#epja-app .epja-nav-btn{
-  -webkit-appearance:none; appearance:none; border:0; outline:none; display:flex; align-items:center; gap:10px; width:100%;
-  padding:12px 16px; text-align:left; font-size:15px; font-weight:600; color:#e8eaff; background:rgba(255,255,255,.12);
-  border-radius:12px; cursor:pointer; transition:all .2s ease;
+#epja-app .epja-nav{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin:16px 0;
 }
-#epja-app .epja-nav-btn:hover{ background:rgba(255,255,255,.2); transform:translateY(-1px); }
-#epja-app .epja-nav-btn.is-active{ background:#fff; color:#0b2e8a; box-shadow:0 4px 10px rgba(0,0,0,.1); }
-#epja-app .epja-sidebar-footer{ margin-top:auto; text-align:center; font-size:13px; opacity:.9; padding-top:10px; border-top:1px solid rgba(255,255,255,.25); }
+#epja-app .epja-nav-btn{
+  appearance:none;
+  border:0;
+  outline:none;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  padding:12px 16px;
+  text-align:left;
+  font-size:15px;
+  font-weight:600;
+  color:#e8eaff;
+  background:rgba(255,255,255,.12);
+  border-radius:12px;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+#epja-app .epja-nav-btn:hover{
+  background:rgba(255,255,255,.2);
+  transform:translateY(-1px);
+}
+#epja-app .epja-nav-btn.is-active{
+  background:#fff;
+  color:#0b2e8a;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+#epja-app .epja-sidebar-footer{
+  margin-top:auto;
+  text-align:center;
+  font-size:13px;
+  opacity:.9;
+  padding-top:10px;
+  border-top:1px solid rgba(255,255,255,.25);
+}
 
 /* Contenido principal */
-#epja-app .epja-main{ background:#fff; border-radius:16px; padding:28px; box-shadow:0 6px 20px rgba(0,0,0,.06); }
+#epja-app .epja-main{
+  background:#fff;
+  border-radius:16px;
+  padding:28px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+}
 #epja-app .epja-view.is-hidden{ display:none; }
 
 @media (max-width:900px){
   #epja-app .epja-app-shell{ grid-template-columns:1fr; }
-  #epja-app .epja-sidebar{ display:grid; grid-template-columns:1fr auto; align-items:center; gap:12px; }
-  #epja-app .epja-nav{ grid-column:1 / -1; overflow-x:auto; padding-bottom:6px; }
-}
-
-/* =========================================
-   EPJA — Altura del layout y sidebar “largo”
-   Pegar al FINAL del CSS
-   ========================================= */
-
-/* 1) Variables (ajústalas si tu header/footer son más altos) */
-:root{
-  --epja-header-h: 64px;   /* alto aproximado del header del portal */
-  --epja-footer-h: 56px;   /* alto aproximado del footer del portal */
-  --epja-outer-gap: 24px;  /* padding/margen vertical que dejaste a #epja-app */
-}
-
-/* 2) El shell ocupa casi toda la pantalla */
-#epja-app .epja-app-shell{
-  /* Altura mínima calculada: viewport - header - footer - márgenes superiores/inf. del #epja-app */
-  min-height: calc(100vh - var(--epja-header-h) - var(--epja-footer-h) - (2 * var(--epja-outer-gap)));
-  align-items: stretch; /* hace que las dos columnas tengan la misma altura */
-}
-
-/* 3) El sidebar se estira a la altura del shell */
-#epja-app .epja-sidebar{
-  height: 100%;
-  display: flex;          /* lo mantienes en columna */
-  flex-direction: column;
-}
-
-/* 4) El área principal también ocupa toda la altura disponible */
-#epja-app .epja-main{
-  min-height: 100%;
-}
-
-/* OPCIONAL: si lo quieres todavía más largo sin depender del cálculo,
-   puedes forzarlo a, por ejemplo, 85vh. Descomenta esta línea: */
-#epja-app .epja-app-shell{ min-height: 105vh; }
-
-/* OPCIONAL “sticky”: que el menú quede fijo al hacer scroll en desktop
-   (quítalo si prefieres que ambos crezcan a la par). */
-@media (min-width: 901px){
-  /* comentar si no quieres sticky */
-  /* #epja-app .epja-sidebar{ position: sticky; top: calc(var(--epja-outer-gap)); } */
+  #epja-app .epja-sidebar{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:12px;
+  }
+  #epja-app .epja-nav{
+    grid-column:1 / -1;
+    overflow-x:auto;
+    padding-bottom:6px;
+  }
 }
 
 /* =========================================================
-   EPJA — Módulo Institución Educativa (coherencia con layout)
-   ========================================================= */
+   Altura del layout y sidebar largo
+========================================================= */
+:root{
+  --epja-header-h: 64px;
+  --epja-footer-h: 56px;
+  --epja-outer-gap: 24px;
+}
+#epja-app .epja-app-shell{
+  min-height: calc(100vh - var(--epja-header-h) - var(--epja-footer-h) - (2 * var(--epja-outer-gap)));
+  align-items: stretch;
+}
+#epja-app .epja-sidebar{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#epja-app .epja-main{ min-height: 100%; }
+/* un poco más largo */
+#epja-app .epja-app-shell{ min-height: 105vh; }
 
-/* Panel principal dentro del main de la app (alinea y limita ancho) */
+/* =========================================================
+   Módulo: Institución Educativa
+========================================================= */
 .epja-panel {
   width: 100%;
   max-width: 980px;
-  margin: 0 auto 24px auto; /* centrado y separación inferior */
+  margin: 0 auto 24px auto;
 }
-
-/* Cabecera del panel con título centrado y color institucional */
 .epja-panel-header { padding: 12px 18px; }
 .epja-panel-title {
   font-size: 1.35rem;
@@ -137,8 +271,6 @@ body.epja-app-active #epja-app { display: block; }
   letter-spacing: .3px;
   margin: 0;
 }
-
-/* Cuerpo del panel con borde y sombra interior como en imagen 2 */
 .epja-panel-body {
   background: #ffffff;
   border-radius: 16px;
@@ -146,22 +278,20 @@ body.epja-app-active #epja-app { display: block; }
   box-shadow: 0 2px 0 rgba(11, 61, 145, 0.06) inset, 0 1px 0 rgba(0,0,0,0.03);
   padding: 14px;
 }
-
-/* Caja gris clara interna para inputs (respira dentro del panel) */
 .epja-box {
   background: #f9fbfe;
   border: 1px solid rgba(9, 44, 106, 0.10);
   border-radius: 12px;
   padding: 18px;
 }
-
-/* Formulario compacto */
 .epja-form.-tight { margin-bottom: 12px; }
+.epja-inline {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
 
-/* Línea con input expandible y botón al costado */
-.epja-inline { display: flex; gap: 12px; align-items: center; }
-
-/* Input con borde suave gris-azulado; mismo alto que botón */
+/* Inputs y botones base */
 .epja-input {
   flex: 1;
   padding: 10px 14px;
@@ -175,8 +305,6 @@ body.epja-app-active #epja-app { display: block; }
   border-color: #0b3d91 !important;
   box-shadow: 0 0 0 3px rgba(11, 61, 145, .12);
 }
-
-/* Botón institucional */
 .epja-btn {
   background: #0b3d91;
   color: #ffffff;
@@ -191,19 +319,15 @@ body.epja-app-active #epja-app { display: block; }
 .epja-btn:hover { background: #092c6a; }
 .epja-btn[disabled] { opacity: .7; cursor: not-allowed; }
 
-/* Texto auxiliar */
 .epja-label { font-weight: 600; display: block; margin-bottom: 6px; }
 .epja-hint { font-size: .9rem; color: #5d6b85; margin-top: 6px; }
 
-/* Mensajes de estado */
 .epja-msg { margin-top: 10px; font-size: .95rem; }
 .epja-msg.-ok { color: #17663a; }
 .epja-msg.-warn { color: #8c6a00; }
 .epja-msg.-err { color: #8b1a1a; }
 
-/* Bloque de resultados */
 .epja-result { margin-top: 14px; }
-
 .epja-subtitle {
   font-size: 1.1rem;
   font-weight: 700;
@@ -211,9 +335,16 @@ body.epja-app-active #epja-app { display: block; }
   margin: 0 0 12px 0;
 }
 
-/* Campos estándar de la app */
-.epja-field { display: flex; flex-direction: column; margin-bottom: 12px; }
-.epja-field label { font-weight: 600; margin-bottom: 4px; color: #2d3b57; }
+.epja-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+.epja-field label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #2d3b57;
+}
 .epja-field input {
   padding: 10px 12px;
   border: 1px solid #cfd6e4;
@@ -222,34 +353,27 @@ body.epja-app-active #epja-app { display: block; }
   font-size: 1rem;
 }
 
-/* Grilla responsiva 3 columnas (colapsa a 1 en móviles) */
+/* Grilla 3 col */
 .epja-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
-@media (max-width: 920px) { .epja-grid { grid-template-columns: 1fr; } }
+@media (max-width: 920px) {
+  .epja-grid { grid-template-columns: 1fr; }
+}
 
 /* Utilidades */
 .hidden { display: none !important; }
-/* Evitar paddings de secciones genéricas: este módulo usa panel */
 #mod-institucion.epja-panel { padding: 0; }
 
-/* ===============================
-   EPJA — Resultados en formato vertical
-   =============================== */
+/* Resultados verticales */
 #infoInstitucion .epja-grid {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
-#infoInstitucion .epja-field {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
+#infoInstitucion .epja-field { width: 100%; }
 #infoInstitucion input[readonly] {
   background: #ffffff;
   color: #1e293b;
@@ -258,9 +382,9 @@ body.epja-app-active #epja-app { display: block; }
   padding: 10px 12px;
 }
 
-/* ===== EPJA — Extensiones/Establecimientos =====
-   Radios en línea y consistencia visual del campo numérico
------------------------------------------------------- */
+/* =========================================================
+   Extensiones / Establecimientos
+========================================================= */
 .epja-inline-options{
   display: flex;
   gap: 16px;
@@ -288,51 +412,542 @@ body.epja-app-active #epja-app { display: block; }
   border-color: #0b3d91 !important;
   box-shadow: 0 0 0 3px rgba(11,61,145,.12);
 }
-.epja-msg.-err{ color: #8b1a1a; }
-.hidden{ display: none !important; }
-
-/* Refuerzo por si el tema intenta ocultar el resultado */
-#infoInstitucion.epja-result{ display:block !important; visibility:visible !important; }
-#infoInstitucion input[readonly]{ background:#ffffff; color:#0f172a; }
-
-/* ===== EPJA — Alinear "Número de extensiones" como el campo Tipo ===== */
-#bloqueNumExt{
-  display: flex;
-  flex-direction: column;   /* apila label, input, hint */
-  gap: 6px;
+#infoInstitucion.epja-result{
+  display:block !important;
+  visibility:visible !important;
+}
+#infoInstitucion input[readonly]{
+  background:#ffffff;
+  color:#0f172a;
 }
 
+/* Número de extensiones */
+#bloqueNumExt{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 #bloqueNumExt label{
   display: block;
   font-weight: 600;
   color: #2d3b57;
-  margin-bottom: 2px;       /* igual que otros labels */
+  margin-bottom: 2px;
 }
-
 #bloqueNumExt input#numExtensiones{
-  width: 100%;              /* ocupa todo el ancho del panel */
+  width: 100%;
   background: #fff;
   border: 1px solid #cfd6e4;
   border-radius: 8px;
   padding: 10px 12px;
   font-size: 1rem;
 }
-
 #bloqueNumExt input#numExtensiones:focus{
   border-color: #0b3d91 !important;
   box-shadow: 0 0 0 3px rgba(11,61,145,.12);
 }
-
 #bloqueNumExt .epja-hint{
-  display: block;           /* forzar a línea propia (debajo del input) */
+  display: block;
   margin-top: 2px;
   color: #5d6b85;
   font-size: .9rem;
 }
-
-/* Por si hereda alguna disposición en fila de un contenedor padre */
 #bloqueExtensiones .epja-field,
 #bloqueExtensiones .epja-grid{
   display: block;
 }
+
+/* =========================================================
+   Acordeón de extensiones
+========================================================= */
+.epja-accordion {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+.epja-acc-item {
+  border: 1px solid #e3e6ef;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(18, 28, 45, 0.04);
+}
+.epja-acc-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+  transition: all 0.2s ease-in-out;
+  background: linear-gradient(135deg, #e8ecf8 0%, #f5f7fc 100%);
+  color: #0b3d91;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+.epja-acc-header:hover,
+.epja-acc-header:focus {
+  background: linear-gradient(135deg, #dbe5fb 0%, #eef2ff 100%);
+  box-shadow: 0 0 0 3px rgba(11, 61, 145, 0.12);
+  outline: none;
+}
+.epja-acc-header[aria-expanded="true"] {
+  background: linear-gradient(135deg, #0b3d91 0%, #2f2b8f 100%);
+  color: #ffffff;
+}
+.epja-acc-header .epja-acc-caret {
+  transition: transform .2s ease-in-out;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+.epja-acc-header[aria-expanded="true"] .epja-acc-caret {
+  transform: rotate(90deg);
+  opacity: 1;
+}
+.epja-acc-body {
+  padding: 16px 18px;
+  border-top: 1px solid rgba(11, 61, 145, 0.15);
+  border-radius: 0 0 12px 12px;
+  background: #ffffff;
+  display: grid;
+  gap: 12px;
+}
+
+/* Select interno */
+#extPanelsContainer select.epja-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cfd6e4;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 1rem;
+  line-height: 1.4;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #4a5568 50%), 
+                    linear-gradient(135deg, #4a5568 50%, transparent 50%);
+  background-position: calc(100% - 22px) calc(50% - 3px), calc(100% - 17px) calc(50% - 3px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+#extPanelsContainer select.epja-select:focus {
+  border-color: #0b3d91 !important;
+  box-shadow: 0 0 0 3px rgba(11, 61, 145, .12);
+}
+#extPanelsContainer select.epja-select option[value=""] {
+  color: #6b7280;
+}
+
+/* =========================================================
+   Acciones (botón + mensaje validación)
+========================================================= */
+.epja-actions {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+#msgValInstitucion {
+  max-width: 380px;
+  text-align: right;
+  color: #b91c1c;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  padding-right: 0.25rem;
+}
+#msgValInstitucion.hidden { display: none !important; }
+
+/* =========================================================
+   Menú lateral — forzar color activo
+========================================================= */
+.epja-nav-btn {
+  background: #1f2937 !important;
+  color: #ffffff !important;
+  border: none !important;
+  transition: background 0.3s ease;
+}
+.epja-nav-btn.is-active {
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  font-weight: 600 !important;
+  box-shadow: inset 0 0 0 2px #1f2937 !important;
+}
+
+/* =========================================================
+   Control de vistas (último override)
+   ========================================================= */
+.epja-view { display: none; }
+.epja-view.is-active { display: block; }
+.is-hidden { display: none !important; }
+
+/* =========================================================
+   Modo Autoridad
+========================================================= */
+.epja-authority-mode {
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+.epja-switch {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: 600;
+  color: #0f172a;
+}
+.epja-help {
+  font-size: 0.75rem;
+  color: #475569;
+  margin-top: 0.35rem;
+}
+/* ojo: este redefine epja-input pero lo dejamos porque lo estás usando en autoridad */
+.epja-input {
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.45rem 0.5rem;
+  font-size: 0.85rem;
+  width: 100%;
+}
+.epja-docblock.hidden { display: none; }
+/* cédula + botón */
+.epja-grid-autoridad {
+  display: grid;
+  grid-template-columns: 1.3fr 0.6fr;
+  gap: 0.75rem;
+  align-items: end;
+}
+.epja-field-inline {
+  display: flex;
+  flex-direction: column;
+}
+.epja-label-invisible {
+  visibility: hidden;
+  height: 0;
+}
+.epja-btn-sm {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.7rem;
+}
+
+/* =========================================================
+   Modal de Autoridad
+========================================================= */
+.epja-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+.epja-modal.show { display: flex; }
+.epja-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+}
+.epja-modal-dialog {
+  position: relative;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+  width: min(680px, 94vw);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.epja-modal-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.epja-modal-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+.epja-modal-close {
+  background: transparent;
+  border: 1px solid #cbd5f5;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.epja-modal-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+  gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+.epja-modal-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+/* botones secundarios */
+.epja-btn-secondary {
+  background: #ffffff;
+  color: #0b3d91;
+  border: 1px solid rgba(11, 61, 145, 0.25);
+  border-radius: 8px;
+}
+.epja-btn-secondary:hover {
+  background: #e5ecf7;
+  color: #092c6a;
+}
+
+/* =========================================================
+   Tabla de Autoridad (corregida)
+   Nota: la vista real se llama #view-op2
+========================================================= */
+#view-op2 .epja-table-wrapper {
+  display: block !important;
+}
+#view-op2 table {
+  display: table !important;
+  width: 100%;
+  border-collapse: collapse;
+}
+#view-op2 table thead { display: table-header-group !important; }
+#view-op2 table tbody { display: table-row-group !important; }
+#view-op2 table tr { display: table-row !important; }
+#view-op2 table td,
+#view-op2 table th {
+  display: table-cell !important;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Ajustar inputs SOLO en Autoridad (para no romper el paso 1) */
+#view-op2 .epja-input {
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.45rem 0.5rem;
+  font-size: 0.85rem;
+  width: 100%;
+  background: #fff;
+}
+
+.epja-btn-action {
+  background: #0b3d91;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s ease;
+  white-space: nowrap;
+}
+.epja-btn-action:hover {
+  background: #092c6a;
+}
+.epja-btn-action:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   Vistas EPJA (controladas por el menú y por JS)
+   ========================================================= */
+/* 1) Por defecto, TODAS las vistas ocultas */
+.epja-view {
+  display: none;
+}
+
+/* 2) La vista activa se muestra */
+.epja-view.is-active {
+  display: block;
+}
+
+/* 3) Clase genérica de oculto usada por el JS */
+.is-hidden {
+  display: none !important;
+}
+
+/* 4) El contenido principal ya tenía esta regla, la dejamos */
+#epja-app .epja-view.is-hidden {
+  display: none;
+}
+
+/* =========================================================
+   Tabla de Autoridad (dentro de la vista 2)
+   IMPORTANTE: no forzar a que #view-op2 se muestre siempre
+   ========================================================= */
+
+/* Antes tenías:
+   #view-op2.epja-view { display: block !important; }
+   ESO ES LO QUE HACÍA QUE SE VEA SIEMPRE
+   Lo eliminamos.
+*/
+
+/* Solo estilizamos lo de adentro, no el contenedor */
+#view-op2 .epja-table-wrapper {
+  display: block !important;
+}
+#view-op2 table {
+  display: table !important;
+  width: 100%;
+  border-collapse: collapse;
+}
+#view-op2 table thead { display: table-header-group !important; }
+#view-op2 table tbody { display: table-row-group !important; }
+#view-op2 table tr { display: table-row !important; }
+#view-op2 table td,
+#view-op2 table th {
+  display: table-cell !important;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Ajustar inputs SOLO en Autoridad (para no romper el paso 1) */
+#view-op2 .epja-input {
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.45rem 0.5rem;
+  font-size: 0.85rem;
+  width: 100%;
+  background: #fff;
+}
+
+/* ===== Modal EPJA centrado ===== */
+#epja-modal-institucion {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+#epja-modal-institucion.show {
+  display: flex !important; /* lo muestra y activa el centrado */
+}
+
+#epja-modal-institucion .epja-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+#epja-modal-institucion .epja-modal-dialog {
+  position: relative;
+  max-width: 720px;
+  width: min(92vw, 720px);
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.28);
+  z-index: 1;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* fila de cédula en el modal */
+.epja-grid-autoridad {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: end; /* esto baja el botón para que quede alineado */
+}
+
+/* botón del modal igual que los demás */
+#modBtnBuscarCedula {
+  height: 40px;
+  padding: 0 1.25rem;
+  background: #0b4f94;
+  color: #fff;
+  border: none;
+  border-radius: .5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .05s ease-out;
+  white-space: nowrap;
+}
+#modBtnBuscarCedula:hover {
+  background: #093f75;
+}
+#modBtnBuscarCedula:active {
+  transform: translateY(1px);
+}
+
+#btnBuscarCedula {
+  height: 40px;
+  padding: 0 1.25rem;
+  background: #0b4f94;
+  color: #fff;
+  border: none;
+  border-radius: .5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .05s ease-out;
+  white-space: nowrap;
+}
+#btnBuscarCedula:hover {
+  background: #093f75;
+}
+#btnBuscarCedula:active {
+  transform: translateY(1px);
+}
+
+/* === Bloque Cédula + Botón Registro Civil === */
+.epja-grid-autoridad {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: end; /* Alinea el botón con la parte inferior del input */
+}
+
+/* Botón Buscar en Registro Civil (todos los modales) */
+#modBtnBuscarCedula,
+#btnBuscarCedula {
+  height: 42px !important;
+  padding: 0 1.5rem !important;
+  background-color: #0b4f94 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-out;
+}
+
+#modBtnBuscarCedula:hover,
+#btnBuscarCedula:hover {
+  background-color: #093f75 !important;
+}
+
+#modBtnBuscarCedula:active,
+#btnBuscarCedula:active {
+  transform: translateY(1px);
+}
+
+/* Input de cédula alineado */
+#modCedula,
+#txtCedula {
+  height: 42px;
+}
+
 
