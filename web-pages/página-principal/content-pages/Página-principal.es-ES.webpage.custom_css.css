@@ -950,4 +950,174 @@ body.epja-app-active #epja-app { display: block; }
   height: 42px;
 }
 
+/* Igualar separación y scroll del contenedor */
+#view-op3 .epja-panel { background:#fff; border-radius:16px; box-shadow:0 10px 24px rgba(0,0,0,.08); }
 
+/* Cohesión de tablas entre secciones */
+#view-op3 .epja-table-wrapper { margin-top:.5rem; }
+#view-op3 .epja-table th,
+#view-op3 .epja-table td { vertical-align:middle; }
+#view-op3 .epja-table td:last-child { text-align:left; } /* igual que en op2 */
+
+/* Botón "Configurar" igual al de op2 */
+#view-op3 .epja-btn-config {
+  min-width: 7.5rem;      /* parecido a “Acción” de op2 */
+  padding: .55rem 1rem;
+}
+
+/* =========================================================
+   EPJA — Tablas compartidas (Autoridad y Oferta)
+   Aplica a todas las tablas .epja-table (view-op2 y view-op3)
+========================================================= */
+.epja-table-wrapper{
+  display: block;
+  overflow-x: auto;
+  border: 1px solid rgba(9, 44, 106, 0.12);
+  border-radius: 12px;
+  background: #ffffff;
+  /* ligero relieve interior + sombra suave como en op2 */
+  box-shadow: 0 2px 0 rgba(11, 61, 145, 0.06) inset, 0 1px 0 rgba(0,0,0,0.03);
+  padding: 0; /* la tabla lleva su propio padding en celdas */
+}
+
+.epja-table{
+  width: 100%;
+  min-width: 720px;           /* evita que colapse en pantallas pequeñas */
+  border-collapse: collapse;
+}
+
+.epja-table thead th{
+  background: #eef2ff;        /* cabecera como en op2 */
+  color: #0b3d91;
+  font-weight: 800;
+  font-size: .95rem;
+  letter-spacing: .2px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 14px;
+}
+
+.epja-table tbody td{
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #0f172a;
+}
+
+.epja-table tbody tr:hover td{
+  background: #f8fafc;        /* hover suave como en op2 */
+}
+
+.epja-table td:last-child{
+  /* deja a la izquierda, igual que tu op2 actual */
+  text-align: left;
+}
+
+/* Botón de acciones/Configurar unificado (igual look que op2) */
+.epja-btn-config, .epja-btn-action{
+  background: #0b3d91;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: .55rem 1rem;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .2s ease;
+  min-width: 7.5rem;
+}
+.epja-btn-config:hover, .epja-btn-action:hover{ background:#092c6a; }
+.epja-btn-config:disabled, .epja-btn-action:disabled{ opacity:.45; cursor:not-allowed; }
+
+/* =========================================================
+   UTILITARIOS
+   ========================================================= */
+/* Oculta bloques condicionales */
+.hidden { display: none !important; }
+
+/* =========================================================
+   MODAL — visibilidad (asegura que show funcione en centro)
+   ========================================================= */
+.epja-modal { display: none; }
+.epja-modal.show { display: flex !important; }   /* centrado y por encima */
+#epja-modal-oferta[aria-hidden="false"],
+#epja-modal-institucion[aria-hidden="false"] {
+  display: flex !important;
+  visibility: visible;
+}
+
+
+/* ===== Oferta Educativa — modal y checks ===== */
+.epja-oferta-body{ max-height: 66vh; overflow-y: auto; }
+.epja-ofr-section{ margin-bottom: .9rem; }
+.epja-ofr-title{
+  margin: 0 0 .4rem 0;
+  color:#0b3d91; font-weight:800; letter-spacing:.2px; font-size:.95rem;
+}
+.epja-check-grid{
+  display:grid; gap:.5rem;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+}
+.epja-check-grid.-cols3{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+@media (max-width: 980px){
+  .epja-check-grid{ grid-template-columns: 1fr; }
+  .epja-check-grid.-cols3{ grid-template-columns: 1fr; }
+}
+.epja-check{
+  display:flex; align-items:center; gap:.5rem;
+  background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:.55rem .7rem;
+}
+.epja-check input[type="checkbox"]{
+  width:18px; height:18px; accent-color:#0b3d91; cursor:pointer;
+}
+.epja-check span{ font-size:.92rem; color:#0f172a; }
+
+/* === Cédula + Botón: mostrar el botón debajo del input, con espaciado compacto === */
+.epja-grid-autoridad {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem; /* antes 0.75rem — reduce el espacio general */
+  margin-bottom: 0.5rem;
+}
+
+.epja-grid-autoridad .epja-field {
+  width: 100%;
+  margin-bottom: 0; /* elimina margen interno adicional */
+}
+
+/* Mensaje de validación */
+#msgCedula,
+#modMsgCedula {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  line-height: 1.25;
+}
+
+/* Botón debajo del input, alineado a la derecha */
+#btnBuscarCedula,
+#modBtnBuscarCedula {
+  align-self: flex-end;
+  height: 40px;
+  padding: 0 1.4rem;
+  background-color: #0b4f94;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-out;
+  margin-top: 0.1rem; /* ajusta la separación del campo */
+}
+
+#btnBuscarCedula:hover,
+#modBtnBuscarCedula:hover {
+  background-color: #093f75;
+}
+
+#btnBuscarCedula:active,
+#modBtnBuscarCedula:active {
+  transform: translateY(1px);
+}

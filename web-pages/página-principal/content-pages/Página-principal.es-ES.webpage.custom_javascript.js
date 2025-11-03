@@ -1166,6 +1166,513 @@ epjaReady(function () {
   }
 });
 
+// =============================================
+// 6. MÓDULO — Oferta Educativa (tabla de instituciones)
+// =============================================
+epjaReady(function () {
+
+  // -------------------------------------------------------
+  // Cache de elementos de la vista de Oferta (paso 3)
+  // -------------------------------------------------------
+  var viewOferta = document.getElementById("view-op3");
+  var tblOferta  = document.getElementById("tblOfertaInstituciones");
+  var tbody      = tblOferta ? tblOferta.querySelector("tbody") : null;
+
+  /**
+   * ensureOfertaVisible
+   * Garantiza que la vista 3 sea visible (remueve estilos o clases que la oculten).
+   */
+  function ensureOfertaVisible() {
+    if (!viewOferta) return;
+    viewOferta.style.removeProperty("display");
+    viewOferta.classList.remove("is-hidden");
+    if (tblOferta) tblOferta.style.removeProperty("display");
+  }
+
+  /**
+   * renderTablaOferta
+   * Pinta las filas de instituciones desde window.epjaInstituciones.
+   * Cada botón "Configurar" abre el modal de opciones usando EPJA_openOfertaModal(index).
+   */
+  function renderTablaOferta() {
+    if (!tbody) return;
+
+    var lista = Array.isArray(window.epjaInstituciones) ? window.epjaInstituciones : [];
+    tbody.innerHTML = "";
+
+    if (!lista.length) {
+      var tr = document.createElement("tr");
+      var td = document.createElement("td");
+      td.colSpan = 4;
+      td.textContent = "No existen instituciones registradas en el paso anterior.";
+      td.style.textAlign = "center";
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+      return;
+    }
+
+    lista.forEach(function (item, index) {
+      var tr = document.createElement("tr");
+
+      // Columna #
+      var tdNum = document.createElement("td");
+      tdNum.textContent = index + 1;
+
+      // Columna Nombre
+      var tdNom = document.createElement("td");
+      tdNom.textContent = item.nombre || "Sin nombre";
+
+      // Columna Tipo
+      var tdTipo = document.createElement("td");
+      tdTipo.textContent = item.tipo || "—";
+
+      // Columna Acciones
+      var tdAcc = document.createElement("td");
+      var btnCfg = document.createElement("button");
+      btnCfg.type = "button";
+      btnCfg.className = "epja-btn epja-btn-config";
+      btnCfg.textContent = "Configurar";
+
+      // Enlace al modal
+      btnCfg.setAttribute("data-ofr-idx", String(index));
+      btnCfg.addEventListener("click", function () {
+        if (typeof window.EPJA_openOfertaModal === "function") {
+          window.EPJA_openOfertaModal(index);
+        } else {
+          console.warn("EPJA_openOfertaModal no está disponible.");
+        }
+      });
+
+      // Estado visual si ya está configurado
+      if (window.epjaOferta && window.epjaOferta[index]) {
+        btnCfg.classList.add("is-success");
+        btnCfg.textContent = "Configurado";
+      }
+
+      tdAcc.appendChild(btnCfg);
+
+      tr.appendChild(tdNum);
+      tr.appendChild(tdNom);
+      tr.appendChild(tdTipo);
+      tr.appendChild(tdAcc);
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Exponer la función de pintado a nivel global
+  window.EPJA_renderOferta = renderTablaOferta;
+
+  // Botón “Finalizar y Guardar”
+var btnOfertaFinalizar = document.getElementById("btnOfertaFinalizar");
+if (btnOfertaFinalizar) {
+  btnOfertaFinalizar.addEventListener("click", function () {
+    // Validar que haya registros configurados
+    var configurados = (window.epjaOferta || []).filter(Boolean).length;
+    if (!configurados) {
+      alert("Antes de finalizar, configure al menos una oferta educativa.");
+      return;
+    }
+
+    // Persistir globalmente o enviar al backend (según tu flujo)
+    console.log("[EPJA] Datos finales de oferta:", window.epjaOferta);
+
+    // Mensaje de confirmación
+    alert("La información de oferta educativa ha sido guardada correctamente.");
+
+    // Opcional: redirigir o cerrar sesión
+    if (typeof window.EPJA_setActiveView === "function") {
+      window.EPJA_setActiveView("view-op1"); // vuelve al inicio o dashboard
+    }
+  });
+}
+
+  // Re-pinta al recibir el evento del paso 1
+  window.addEventListener("epja:institucion-loaded", function () {
+    if (viewOferta && !viewOferta.classList.contains("is-hidden")) {
+      window.EPJA_renderOferta();
+    }
+  });
+
+  // Pinta si ya estaba visible al cargar
+  if (viewOferta && !viewOferta.classList.contains("is-hidden")) {
+    ensureOfertaVisible();
+    window.EPJA_renderOferta();
+  }
+
+  // Encadena EPJA_setActiveView para pintar al entrar a view-op3 (solo una vez)
+  if (!window.__EPJA_WRAP_SET_VIEW_FOR_OFFER__) {
+    window.__EPJA_WRAP_SET_VIEW_FOR_OFFER__ = true;
+
+    var _oldSetView = window.EPJA_setActiveView;
+    window.EPJA_setActiveView = function (viewId) {
+      if (typeof _oldSetView === "function") _oldSetView(viewId);
+      if (viewId === "view-op3") {
+        ensureOfertaVisible();
+        window.EPJA_renderOferta();
+      }
+    };
+  }
+
+  // =========================================================
+  //  MÓDULO DEL MODAL — abrir, poblar, dependencias y guardar
+  // =========================================================
+
+  // Estado global de la oferta (uno por institución/extensión)
+  window.epjaOferta = window.epjaOferta || [];  // índice = fila de epjaInstituciones
+
+  (function OfertaModalModule(){
+    // ─────────────────────────────────────────────────────────────
+    // Referencias del modal
+    // ─────────────────────────────────────────────────────────────
+    var modal      = document.getElementById("epja-modal-oferta");
+    var body       = document.getElementById("epjaModalOfertaBody");
+    var lblInst    = document.getElementById("epjaModalOfertaInst");
+    var btnClose   = document.getElementById("epjaOfertaClose");
+    var btnGuardar = document.getElementById("epjaOfertaGuardar");
+
+    if (!modal || !body || !lblInst || !btnClose || !btnGuardar) {
+      console.warn("Modal de oferta: faltan referencias de elementos. Verifica IDs en el HTML.");
+      return;
+    }
+
+    // Checks raíz
+    var chkSemip = document.getElementById("ofr_mod_semipresencial");
+    var chkDist  = document.getElementById("ofr_mod_distancia");
+
+    // Bloques condicionales y checks
+    var blockDist   = document.getElementById("ofr_block_distancia");
+    var chkDistVirt = document.getElementById("ofr_dist_virtual");
+    var chkDistAsis = document.getElementById("ofr_dist_asistida");
+
+    var blockAsist = document.getElementById("ofr_block_asistida");
+    var chkAsCPL   = document.getElementById("ofr_asist_cpl");
+    var chkAsCETAD = document.getElementById("ofr_asist_cetad");
+
+    // Régimen
+    var chkRegCo = document.getElementById("ofr_reg_costa");
+    var chkRegSi = document.getElementById("ofr_reg_sierra");
+    var chkRegAm = document.getElementById("ofr_reg_ambos");
+
+    // Subnivel
+    var chkSubAlf  = document.getElementById("ofr_sub_alf");
+    var chkSubPost = document.getElementById("ofr_sub_postalf");
+    var chkSubEbs  = document.getElementById("ofr_sub_ebs");
+    var chkSubBGc  = document.getElementById("ofr_sub_bg_ociencias");
+    var chkSubBGt  = document.getElementById("ofr_sub_bg_otecnico");
+
+    // Figuras (contenedor)
+    var blockFig = document.getElementById("ofr_block_figuras");
+
+    // Jornada
+    var chkJMat  = document.getElementById("ofr_j_matutina");
+    var chkJVesp = document.getElementById("ofr_j_vespertina");
+    var chkJNoct = document.getElementById("ofr_j_nocturna");
+
+    // Temporalidad
+    var chkTInt = document.getElementById("ofr_t_intensivo");
+    var chkTNoi = document.getElementById("ofr_t_noint");
+
+    var currentIndex = null;
+
+    // ─────────────────────────────────────────────────────────────
+    // Utilitarios
+    // ─────────────────────────────────────────────────────────────
+    function qsa(sel, root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); }
+    function show(el){ el && el.classList.remove("hidden"); }
+    function hide(el){ el && el.classList.add("hidden"); }
+
+    // Control de dependencias para “A distancia” -> “Tipo de distancia” -> “Asistida”
+    function updateDistBlocks(){
+      if (chkDist && chkDist.checked){
+        show(blockDist);
+      } else {
+        hide(blockDist);
+        if (chkDistVirt) chkDistVirt.checked = false;
+        if (chkDistAsis) chkDistAsis.checked = false;
+        hide(blockAsist);
+        if (chkAsCPL)   chkAsCPL.checked   = false;
+        if (chkAsCETAD) chkAsCETAD.checked = false;
+      }
+      if (chkDist && chkDist.checked && chkDistAsis && chkDistAsis.checked){
+        show(blockAsist);
+      } else {
+        hide(blockAsist);
+        if (chkDistAsis && !chkDistAsis.checked){
+          if (chkAsCPL)   chkAsCPL.checked   = false;
+          if (chkAsCETAD) chkAsCETAD.checked = false;
+        }
+      }
+    }
+
+    // Muestra figuras solo si BG Técnico
+    function updateFigurasBlock(){
+      if (chkSubBGt && chkSubBGt.checked) {
+        show(blockFig);
+      } else {
+        hide(blockFig);
+        qsa('#ofr_block_figuras input[type="checkbox"]').forEach(function(i){ i.checked=false; });
+      }
+    }
+
+    // Inserta/actualiza aviso de validación
+    function showOfertaAlert(errors) {
+      var box = document.getElementById("epjaOfertaAlert");
+      if (!box) {
+        box = document.createElement("div");
+        box.id = "epjaOfertaAlert";
+        box.className = "epja-msg -err";
+        box.style.marginBottom = ".75rem";
+        body.insertBefore(box, body.firstChild);
+      }
+      if (errors && errors.length) {
+        box.innerHTML = "Por favor corrija lo siguiente:<ul style='margin:.35rem 0 0 .9rem; padding:0;'>"
+          + errors.map(function(e){ return "<li>"+e+"</li>"; }).join("")
+          + "</ul>";
+        box.classList.remove("hidden");
+        body.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        box.classList.add("hidden");
+        box.innerHTML = "";
+      }
+    }
+
+    // Valida selecciones del modal (con condicionales)
+    function validarOfertaSeleccion() {
+      var errs = [];
+
+      // Modalidad (al menos una)
+      var modalidadOK = (chkSemip && chkSemip.checked) || (chkDist && chkDist.checked);
+      if (!modalidadOK) errs.push("Seleccione al menos una opción en <strong>Modalidad</strong>.");
+
+      // Si “A Distancia” → Tipo de distancia
+      if (chkDist && chkDist.checked) {
+        var tipoDistOK = (chkDistVirt && chkDistVirt.checked) || (chkDistAsis && chkDistAsis.checked);
+        if (!tipoDistOK) errs.push("En <strong>A Distancia</strong>, seleccione <strong>Virtual</strong> o <strong>Asistida</strong>.");
+        // Si “Asistida” → CPL/CETAD
+        if (chkDistAsis && chkDistAsis.checked) {
+          var asistOK = (chkAsCPL && chkAsCPL.checked) || (chkAsCETAD && chkAsCETAD.checked);
+          if (!asistOK) errs.push("En <strong>Tipo de Asistida</strong>, seleccione <strong>CPL</strong> y/o <strong>CETAD</strong>.");
+        }
+      }
+
+      // Régimen (al menos uno)
+      var regimenOK = (chkRegCo && chkRegCo.checked) || (chkRegSi && chkRegSi.checked) || (chkRegAm && chkRegAm.checked);
+      if (!regimenOK) errs.push("Seleccione al menos una opción en <strong>Régimen</strong>.");
+
+      // Subnivel (al menos uno)
+      var subnivelOK = (chkSubAlf && chkSubAlf.checked) ||
+                      (chkSubPost && chkSubPost.checked) ||
+                      (chkSubEbs && chkSubEbs.checked) ||
+                      (chkSubBGc && chkSubBGc.checked) ||
+                      (chkSubBGt && chkSubBGt.checked);
+      if (!subnivelOK) errs.push("Seleccione al menos una opción en <strong>Subnivel Educativo</strong>.");
+
+      // Si BG Técnico → al menos una figura
+      if (chkSubBGt && chkSubBGt.checked) {
+        var hasFigura = qsa('#ofr_block_figuras input[type="checkbox"]').some(function(i){ return i.checked; });
+        if (!hasFigura) errs.push("Para <strong>Bachillerato General Opción Técnico</strong>, seleccione al menos una <strong>Figura Profesional</strong>.");
+      }
+
+      // (Opcional) Exigir Jornadas o Temporalidad:
+      // var jornadaOK = (chkJMat && chkJMat.checked) || (chkJVesp && chkJVesp.checked) || (chkJNoct && chkJNoct.checked);
+      // if (!jornadaOK) errs.push("Seleccione al menos una opción en <strong>Jornada</strong>.");
+      // var tempoOK = (chkTInt && chkTInt.checked) || (chkTNoi && chkTNoi.checked);
+      // if (!tempoOK) errs.push("Seleccione al menos una opción en <strong>Temporalidad</strong>.");
+
+      return errs;
+    }
+
+    // Listeners de dependencias
+    if (chkDist)     chkDist.addEventListener("change", updateDistBlocks);
+    if (chkDistAsis) chkDistAsis.addEventListener("change", updateDistBlocks);
+    if (chkSubBGt)   chkSubBGt.addEventListener("change", updateFigurasBlock);
+
+    // ─────────────────────────────────────────────────────────────
+    // API global: abrir modal y pintar estado previo
+    // ─────────────────────────────────────────────────────────────
+    window.EPJA_openOfertaModal = function(index){
+      var inst = (window.epjaInstituciones||[])[index] || {};
+      currentIndex = index;
+
+      // Título / nombre de institución
+      lblInst.textContent = inst.nombre || "Institución sin nombre";
+
+      // Limpia todos los checks del cuerpo del modal
+      qsa('.epja-ofr-section input[type="checkbox"]', body).forEach(function(i){ i.checked=false; });
+
+      // Resetea bloques condicionales
+      updateDistBlocks();
+      updateFigurasBlock();
+      showOfertaAlert(null);
+
+      // Si hay estado previo, pintarlo
+      var st = (window.epjaOferta && window.epjaOferta[index]) ? window.epjaOferta[index] : {};
+
+      // Modalidad
+      if (st.modalidad && st.modalidad.indexOf('semipresencial')>=0 && chkSemip) chkSemip.checked = true;
+      if (st.modalidad && st.modalidad.indexOf('distancia')>=0     && chkDist)  chkDist.checked  = true;
+      updateDistBlocks();
+
+      // Tipo de distancia
+      if (st.tipoDistancia && st.tipoDistancia.indexOf('virtual')>=0  && chkDistVirt) chkDistVirt.checked = true;
+      if (st.tipoDistancia && st.tipoDistancia.indexOf('asistida')>=0 && chkDistAsis) chkDistAsis.checked = true;
+      updateDistBlocks();
+
+      // Tipo de asistida
+      if (st.tipoAsistida && st.tipoAsistida.indexOf('cpl')>=0   && chkAsCPL)   chkAsCPL.checked   = true;
+      if (st.tipoAsistida && st.tipoAsistida.indexOf('cetad')>=0 && chkAsCETAD) chkAsCETAD.checked = true;
+
+      // Régimen
+      if (st.regimen && st.regimen.indexOf('costa')>=0  && chkRegCo) chkRegCo.checked = true;
+      if (st.regimen && st.regimen.indexOf('sierra')>=0 && chkRegSi) chkRegSi.checked = true;
+      if (st.regimen && st.regimen.indexOf('ambos')>=0  && chkRegAm) chkRegAm.checked = true;
+
+      // Subnivel
+      if (st.subnivel && st.subnivel.indexOf('alf')>=0          && chkSubAlf)  chkSubAlf.checked  = true;
+      if (st.subnivel && st.subnivel.indexOf('postalf')>=0      && chkSubPost) chkSubPost.checked = true;
+      if (st.subnivel && st.subnivel.indexOf('ebs')>=0          && chkSubEbs)  chkSubEbs.checked  = true;
+      if (st.subnivel && st.subnivel.indexOf('bg_ciencias')>=0  && chkSubBGc)  chkSubBGc.checked  = true;
+      if (st.subnivel && st.subnivel.indexOf('bg_tecnico')>=0   && chkSubBGt)  chkSubBGt.checked  = true;
+      updateFigurasBlock();
+
+      // Figuras
+      if (st.figuras && st.figuras.length){
+        qsa('#ofr_block_figuras input[type="checkbox"]').forEach(function(i){
+          var key = i.getAttribute('data-fig');
+          if (st.figuras.indexOf(key)>=0) i.checked = true;
+        });
+      }
+
+      // Jornada
+      if (st.jornada && st.jornada.indexOf('matutina')>=0   && chkJMat)  chkJMat.checked  = true;
+      if (st.jornada && st.jornada.indexOf('vespertina')>=0 && chkJVesp) chkJVesp.checked = true;
+      if (st.jornada && st.jornada.indexOf('nocturna')>=0   && chkJNoct) chkJNoct.checked = true;
+
+      // Temporalidad
+      if (st.temporalidad && st.temporalidad.indexOf('intensivo')>=0    && chkTInt) chkTInt.checked = true;
+      if (st.temporalidad && st.temporalidad.indexOf('no_intensivo')>=0 && chkTNoi) chkTNoi.checked = true;
+
+      // Mostrar modal
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden","false");
+    };
+
+    // ─────────────────────────────────────────────────────────────
+    // Cerrar modal
+    // ─────────────────────────────────────────────────────────────
+    function closeModal(){
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden","true");
+      currentIndex = null;
+    }
+    btnClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", function(ev){
+      if (ev.target && ev.target.dataset && ev.target.dataset.close === "modal") closeModal();
+    });
+
+    // ─────────────────────────────────────────────────────────────
+    // Guardar con validación (bloquea si faltan datos)
+    // ─────────────────────────────────────────────────────────────
+    btnGuardar.addEventListener("click", function(){
+      if (currentIndex == null) return;
+
+      // Asegurar dependencias actualizadas
+      updateDistBlocks();
+      updateFigurasBlock();
+
+      // Validar
+      var errores = validarOfertaSeleccion();
+      if (errores.length) {
+        showOfertaAlert(errores);
+        return; // 🚫 no guardamos
+      }
+      showOfertaAlert(null); // limpia aviso
+
+      // Construir estado a guardar
+      var st = {
+        modalidad: [],
+        tipoDistancia: [],
+        tipoAsistida: [],
+        regimen: [],
+        subnivel: [],
+        figuras: [],
+        jornada: [],
+        temporalidad: []
+      };
+
+      // Modalidad
+      if (chkSemip && chkSemip.checked) st.modalidad.push('semipresencial');
+      if (chkDist  && chkDist.checked)  st.modalidad.push('distancia');
+
+      // Distancia y Asistida
+      if (chkDist && chkDist.checked){
+        if (chkDistVirt && chkDistVirt.checked) st.tipoDistancia.push('virtual');
+        if (chkDistAsis && chkDistAsis.checked) {
+          st.tipoDistancia.push('asistida');
+          if (chkAsCPL && chkAsCPL.checked)     st.tipoAsistida.push('cpl');
+          if (chkAsCETAD && chkAsCETAD.checked) st.tipoAsistida.push('cetad');
+        }
+      }
+
+      // Régimen
+      if (chkRegCo && chkRegCo.checked) st.regimen.push('costa');
+      if (chkRegSi && chkRegSi.checked) st.regimen.push('sierra');
+      if (chkRegAm && chkRegAm.checked) st.regimen.push('ambos');
+
+      // Subnivel
+      if (chkSubAlf  && chkSubAlf.checked)  st.subnivel.push('alf');
+      if (chkSubPost && chkSubPost.checked) st.subnivel.push('postalf');
+      if (chkSubEbs  && chkSubEbs.checked)  st.subnivel.push('ebs');
+      if (chkSubBGc  && chkSubBGc.checked)  st.subnivel.push('bg_ciencias');
+      if (chkSubBGt  && chkSubBGt.checked)  {
+        st.subnivel.push('bg_tecnico');
+        // Figuras
+        qsa('#ofr_block_figuras input[type="checkbox"]').forEach(function(i){
+          if (i.checked){ st.figuras.push(i.getAttribute('data-fig')); }
+        });
+      }
+
+      // Jornada
+      if (chkJMat  && chkJMat.checked)  st.jornada.push('matutina');
+      if (chkJVesp && chkJVesp.checked) st.jornada.push('vespertina');
+      if (chkJNoct && chkJNoct.checked) st.jornada.push('nocturna');
+
+      // Temporalidad
+      if (chkTInt && chkTInt.checked) st.temporalidad.push('intensivo');
+      if (chkTNoi && chkTNoi.checked) st.temporalidad.push('no_intensivo');
+
+      // Persistir por índice
+      window.epjaOferta = window.epjaOferta || [];
+      window.epjaOferta[currentIndex] = st;
+
+      // Marca visual el botón “Configurar” de la fila
+      try{
+        var tbl = document.getElementById("tblOfertaInstituciones");
+        if (tbl){
+          var rowBtn = tbl.querySelector('button[data-ofr-idx="'+currentIndex+'"]');
+          if (rowBtn){ rowBtn.classList.add('is-success'); rowBtn.textContent = "Configurado"; }
+        }
+      }catch(_){}
+
+      // Cerrar
+      closeModal();
+    });
+
+  })();
+
+
+});
+
+// Garantiza que al cambiar de vista a 'view-op3' se pinte la tabla (si alguien re-envolvió antes)
+(function () {
+  var _oldSetView = window.EPJA_setActiveView;
+  window.EPJA_setActiveView = function (viewId) {
+    _oldSetView(viewId);
+    if (viewId === "view-op3" && typeof window.EPJA_renderOferta === "function") {
+      window.EPJA_renderOferta();
+    }
+  };
+})();
 // =====================================================
 // DEBUG EPJA — forzar que se vea "Autoridad Educativa"
 // Pegar AL FINAL del archivo JS
@@ -1329,4 +1836,3 @@ epjaReady(function () {
     tbl.style.removeProperty("display");
   }
 })();
-

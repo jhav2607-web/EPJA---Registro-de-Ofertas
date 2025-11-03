@@ -445,13 +445,175 @@
           FIN VISTA 2
       ========================================================= -->
 
-      <!-- =========================================================
-          VISTA 3 — OFERTA EDUCATIVA (placeholder)
-      ========================================================= -->
-      <section id="view-op3" class="epja-view is-hidden" aria-labelledby="lbl-op3">
-        <h2 id="lbl-op3">Opción 3</h2>
-        <p>Contenido para la Opción 3.</p>
-      </section>
+    <!-- =========================================================
+        VISTA 3 — OFERTA EDUCATIVA
+    ========================================================= -->
+    <section id="view-op3" class="epja-view is-hidden" aria-labelledby="lbl-op3">
+      <div class="epja-panel" aria-labelledby="lbl-op3">
+        <div class="epja-panel-header">
+          <h2 id="lbl-op3" class="epja-panel-title">OFERTA EDUCATIVA</h2>
+        </div>
+
+        <div class="epja-panel-body">
+          <p class="epja-hint" style="margin-bottom:1rem;">
+            A continuación, se listan las instituciones, extensiones o establecimientos registrados en el paso 1.
+            Desde aquí configurarás la <strong>oferta educativa</strong> de cada una de forma individual.
+          </p>
+
+          <div class="epja-table-wrapper">
+            <table class="epja-table" id="tblOfertaInstituciones" aria-describedby="lbl-op3">
+              <thead>
+                <tr>
+                  <th scope="col" style="width:3rem;">#</th>
+                  <th scope="col">Nombre de la Institución Educativa</th>
+                  <th scope="col" style="width:10rem;">Tipo</th>
+                  <th scope="col" style="width:9rem;">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- se llena por JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="epja-actions">
+          <button id="btnOfertaFinalizar" class="epja-btn epja-btn-secondary">Finalizar y Guardar</button>
+        </div>
+        </div>
+
+        <!-- =========================================================
+            MODAL — CONFIGURAR OFERTA EDUCATIVA
+        ========================================================= -->
+        <div id="epja-modal-oferta" class="epja-modal" aria-hidden="true" role="dialog" aria-modal="false">
+          <div class="epja-modal-overlay" data-close="modal"></div>
+          <div class="epja-modal-dialog" role="document" aria-labelledby="epja-modal-oferta-title">
+            <header class="epja-modal-header">
+              <h3 id="epja-modal-oferta-title">Configurar oferta</h3>
+              <button type="button" class="epja-modal-close" id="epjaOfertaClose" aria-label="Cerrar">&times;</button>
+            </header>
+
+            <div class="epja-modal-body epja-oferta-body" id="epjaModalOfertaBody">
+              <p class="epja-subtitle" id="epjaModalOfertaInst"></p>
+
+              <!-- Modalidad -->
+              <section class="epja-ofr-section">
+                <h4 class="epja-ofr-title">Modalidad</h4>
+                <div class="epja-check-grid">
+                  <label class="epja-check"><input type="checkbox" id="ofr_mod_semipresencial"> <span>Semipresencial</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_mod_distancia"> <span>A Distancia</span></label>
+                </div>
+              </section>
+
+              <!-- Tipo de Distancia (condicional) -->
+              <section id="ofr_block_distancia" class="epja-ofr-section hidden" aria-live="polite">
+                <h4 class="epja-ofr-title">Tipo de Distancia</h4>
+                <div class="epja-check-grid">
+                  <label class="epja-check"><input type="checkbox" id="ofr_dist_virtual"> <span>Virtual</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_dist_asistida"> <span>Asistida</span></label>
+                </div>
+              </section>
+
+              <!-- Tipo de Asistida (condicional) -->
+              <section id="ofr_block_asistida" class="epja-ofr-section hidden" aria-live="polite">
+                <h4 class="epja-ofr-title">Tipo de Asistida</h4>
+                <div class="epja-check-grid">
+                  <label class="epja-check"><input type="checkbox" id="ofr_asist_cpl"> <span>CPL</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_asist_cetad"> <span>CETAD</span></label>
+                </div>
+              </section>
+
+              <!-- Régimen -->
+              <section class="epja-ofr-section">
+                <h4 class="epja-ofr-title">Régimen</h4>
+                <div class="epja-check-grid">
+                  <label class="epja-check"><input type="checkbox" id="ofr_reg_costa"> <span>Costa – Galápagos</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_reg_sierra"> <span>Sierra – Amazonía</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_reg_ambos"> <span>Ambos</span></label>
+                </div>
+              </section>
+
+              <!-- Subnivel Educativo -->
+              <section class="epja-ofr-section">
+                <h4 class="epja-ofr-title">Subnivel Educativo</h4>
+                <div class="epja-check-grid">
+                  <label class="epja-check"><input type="checkbox" id="ofr_sub_alf"> <span>Alfabetización</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_sub_postalf"> <span>Post Alfabetización</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_sub_ebs"> <span>Educación Básica Superior</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_sub_bg_ociencias"> <span>Bachillerato General Opción Ciencias</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_sub_bg_otecnico"> <span>Bachillerato General Opción Técnico</span></label>
+                </div>
+              </section>
+
+              <!-- Figuras Profesionales (condicional) -->
+              <section id="ofr_block_figuras" class="epja-ofr-section hidden" aria-live="polite">
+                <h4 class="epja-ofr-title">Figuras Profesionales</h4>
+                <div class="epja-check-grid -cols3">
+                  <label class="epja-check"><input type="checkbox" data-fig="cultivo_peces"> <span>Cultivo de peces, moluscos y crustáceos</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="prod_agropecuaria"> <span>Producción Agropecuaria</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="recursos_naturales"> <span>Conservación y manejo de recursos naturales</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="alimentos"> <span>Industrialización de productos alimenticios</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="electromecanica"> <span>Electromecánica automotriz</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="chapisteria"> <span>Chapistería y pintura</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="climatizacion"> <span>Climatización</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="electronica_consumo"> <span>Electrónica de consumo</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="construccion"> <span>Aplicación de proyectos de construcción</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="muebles"> <span>Fabricación y montaje de muebles</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="confeccion"> <span>Industria de la confección</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="calzado"> <span>Calzado y Marroquería</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="mecanizado"> <span>Mecanizado y construcciones metálicas</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="instalaciones_electricas"> <span>Instalaciones, equipos y máquinas eléctricas</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="mecatronica"> <span>Mecatrónica</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="electronica"> <span>Electrónica</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="comercializacion"> <span>Comercialización y Ventas</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="comercio_exterior"> <span>Comercio exterior</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="contabilidad"> <span>Contabilidad</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="hoteleria"> <span>Servicios hoteleros</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="turismo"> <span>Ventas e información turística</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="desarrollo_comunitario"> <span>Gestión y desarrollo comunitario</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="gestion_admin"> <span>Gestión administrativa</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="musica"> <span>Música</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="pintura_ceramica"> <span>Pintura – Cerámica</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="escultura_grafico"> <span>Escultura – Arte gráfico</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="diseno_grafico"> <span>Diseño gráfico</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="ebanisteria"> <span>Ebanistería – Tallado y escultura</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="promotor_deportes"> <span>Promotor en recreación y deportes</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="deportes_equipo"> <span>Deportes en equipo</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="informatica"> <span>Informática</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="dispositivos_conectividad"> <span>Dispositivos y conectividad</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="programacion_software"> <span>Programación de Software</span></label>
+                  <label class="epja-check"><input type="checkbox" data-fig="agroecologia"> <span>Producción Agroecológica</span></label>
+                </div>
+              </section>
+
+              <!-- Jornada -->
+              <section class="epja-ofr-section">
+                <h4 class="epja-ofr-title">Jornada</h4>
+                <div class="epja-check-grid">
+                  <label class="epja-check"><input type="checkbox" id="ofr_j_matutina"> <span>Matutina</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_j_vespertina"> <span>Vespertina</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_j_nocturna"> <span>Nocturna</span></label>
+                </div>
+              </section>
+
+              <!-- Temporalidad -->
+              <section class="epja-ofr-section">
+                <h4 class="epja-ofr-title">Temporalidad</h4>
+                <div class="epja-check-grid">
+                  <label class="epja-check"><input type="checkbox" id="ofr_t_intensivo"> <span>Intensivo</span></label>
+                  <label class="epja-check"><input type="checkbox" id="ofr_t_noint"> <span>No Intensivo</span></label>
+                </div>
+              </section>
+            </div>
+
+            <footer class="epja-modal-footer">
+              <button type="button" class="epja-btn epja-btn-secondary" data-close="modal">Cerrar</button>
+              <button type="button" class="epja-btn" id="epjaOfertaGuardar">Guardar datos</button>
+            </footer>
+          </div>
+        </div>
+
+      </div>
+    </section>
     </main>
   </div>
 </div>
